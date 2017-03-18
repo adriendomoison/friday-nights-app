@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar primary>
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>Welcome {{profile.first_name}}!</h2>
+
+    <div *ngIf="!edit_description">
+        <div *ngIf="profile.description">
+            <h5>Description</h5>
+            <blockquote>{{profile.description}}</blockquote>
+            <button ion-button clear (click)="edit_description = !edit_description">Edit description</button>
+        </div>
+        <div *ngIf="!profile.description">
+            <button ion-button outline (click)="edit_description = !edit_description">Write something about you</button>
+        </div>
+    </div>
+
+    <div *ngIf="edit_description">
+        <ion-item>
+            <ion-label stacked>Description</ion-label>
+            <ion-textarea placeholder="Write something about you..." [(ngModel)]="profile.description"></ion-textarea>
+        </ion-item>
+        <button ion-button (click)="editDescription()">Save</button>
+    </div>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>settings</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div>
+        <h5>Primary information</h5>
+        <div *ngIf="wrong_field">
+            <p class="error-message">Some fields are not satisfied with what you gave...</p>
+        </div>
+
+        <ion-item>
+            <ion-label floating>First name</ion-label>
+            <ion-input type="text" name="first_name" pattern="[a-zA-Z]+" [(ngModel)]="user.first_name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Last name</ion-label>
+            <ion-input type="text" name="last_name" pattern="[a-zA-Z]+" [(ngModel)]="user.last_name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Birthday</ion-label>
+            <ion-input type="text" name="birthday" [(ngModel)]="user.birthday"
+                       pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Phone number</ion-label>
+            <ion-input type="text" name="phone_number" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}"
+                       error-msg="Invalid US phone number" [(ngModel)]="user.phone_number"></ion-input>
+        </ion-item>
+
+        <br>
+
+        <button ion-button outline (click)="updateBasicInfo()">Update</button>
+    </div>
+    <hr>
+    <div>
+        <h5>Password</h5>
+        <div *ngIf="wrong_field">
+            <p class="error-message">Some fields are not satisfied with what you gave...</p>
+        </div>
+
+        <ion-item>
+            <ion-input type="password" name="old_password" placeholder="Current password" [(ngModel)]="userChangePassword.password" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input type="password" name="new_password" placeholder="New password" [(ngModel)]="userChangePassword.new_password" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input type="password" name="password_re" placeholder="Retype new password" [(ngModel)]="userChangePassword.password_re" required></ion-input>
+        </ion-item>
+
+        <br>
+
+        <button ion-button outline (click)="updatePassword()">Update</button>
+    </div>
+    <hr>
+    <div>
+        <h5>Delete your account</h5>
+        <button ion-button outline color="danger" (click)="deleteUser()">Delete Account</button>
+    </div>
+</ion-content>

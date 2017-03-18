@@ -1,0 +1,15 @@
+page-loading {
+    .splash {
+        background-color: #303F9F;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .loading-title {
+        height: 400px;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+    }
+}
+
