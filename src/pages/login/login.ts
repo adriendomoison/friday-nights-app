@@ -48,10 +48,11 @@ export class LoginPage {
     }
 
     signIn(): void {
-        // this.accountService.signIn(this.credentials)
-        //     .then(() => {
+        this.accountService.signIn(this.credentials)
+            .then(() => {
                 this.navCtrl.setRoot(HomePage);
-            // }, () => {})
+            }, () => {
+            })
     }
 
     facebookLogin(): void {
