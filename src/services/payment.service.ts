@@ -13,7 +13,7 @@ export class Payment {
 
 export class PaymentCardInfo {
     public_id: string;
-    constructor(public email: string, public name: string, public number: string, public token_id: string) {
+    constructor(public email?: string, public name?: string, public number?: string, public token?: string) {
     }
 }
 
@@ -42,9 +42,13 @@ export class PaymentService {
             .catch(this.handleError);
     }
 
-    createCardCharge(card: PaymentCardInfo): Promise<PaymentCardInfo> {
+    createCardCharge(card_public_id: string): Promise<PaymentCardInfo> {
+        let card = new PaymentCardInfo;
+        card.public_id = card_public_id;
         return this.http
-            .post(this.serviceURL + '/payment/cards', JSON.stringify(card), {headers: this.headers})
+            .post(this.serviceURL + '/payment/card/charge',
+                JSON.stringify(card),
+                {headers: this.headers, withCredentials: true})
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);

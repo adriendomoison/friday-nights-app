@@ -28,4 +28,8 @@ export class ListCardsComponent implements OnInit {
             });
         });
     }
+
+    chargeCard(): void {
+        this.paymentService.createCardCharge(this.card)
+    }
 }
