@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Payment, PaymentService} from "../../services/payment.service";
+import {PaymentService, Payment} from "../../services/payment.service";
 import {AccountService} from "../../services/account.service";
 
 @Component({
@@ -9,14 +9,12 @@ import {AccountService} from "../../services/account.service";
 })
 export class CheckoutPage {
 
-
     payment: Payment;
     hasPaid: boolean;
     email: string;
 
     constructor(private paymentService: PaymentService, private accountService: AccountService) {
         this.hasPaid = false;
-        this.payment = new Payment;
     }
 
     ionViewDidLoad() {
@@ -39,7 +37,7 @@ export class CheckoutPage {
             token: (token: any) => {
                 this.hasPaid = true;
                 let payment = new Payment;
-                payment.token_id = token.id;
+                payment.token = token.id;
                 this.paymentService.createPayment(payment)
                     .then((charged) => {
                         this.payment = charged;
@@ -53,7 +51,5 @@ export class CheckoutPage {
             amount: 500,
             email: this.email
         });
-
     }
-
 }

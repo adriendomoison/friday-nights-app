@@ -1,0 +1,9 @@
+<div class="text-center" style="margin: 20px">
+    <h2>My cards</h2>
+    <select *ngIf="hasCards" class="custom-select" [(ngModel)]="card">
+        <option *ngFor="let card of cards" [value]="card.public_id">{{card.name}} - {{card.number}}</option>
+    </select>
+    <br/>
+    <br/>
+    <button ion-button full><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Pay</button>
+</div>
