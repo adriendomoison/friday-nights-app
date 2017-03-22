@@ -23,8 +23,19 @@
         nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
         anim id est laborum.</p>
 
-    <button ion-button (click)="openCheckout()">Purchase&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i></button>
+    <button ion-button (click)="openCheckout()">
+        Purchase&nbsp;<i class="fa fa-credit-card" aria-hidden="true"></i>
+    </button>
 
     <p *ngIf="hasPaid">We charged you {{payment.amount}} {{payment.currency}}</p>
+
+
+    <div class="card m-2">
+        <div class="card-block" style="width: 100%">
+            <h1>Get Membership</h1>
+            <add-card></add-card>
+            <list-cards></list-cards>
+        </div>
+    </div>
 
 </ion-content>
