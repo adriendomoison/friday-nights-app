@@ -45,10 +45,6 @@ export class AddCardComponent implements OnInit {
             this.hasJumpedExpiryDate = true;
             this.cvc.first.nativeElement.focus();
         }
-        if (this.paymentCard.cvc.length == 3 && !this.hasJumpedCVC) {
-            this.hasJumpedCVC = true;
-            this.submit.first.nativeElement.focus();
-        }
     }
 
     getToken() {

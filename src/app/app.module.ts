@@ -12,10 +12,10 @@ import {SignUpPage} from "../pages/sign-up/sign-up";
 import {AccountService} from "../services/account.service";
 import {CheckoutPage} from "../pages/checkout/checkout";
 import {ProfilePage} from "../pages/profile/profile";
-import {AddCardComponent} from "../components/add-card/add-card.component";
-import {ListCardsComponent} from "../components/list-cards/list-cards.component";
 import {CreditCardExpirationDirective} from "../directives/credit-card-expiration.directive";
 import {CreditCardNumberDirective} from "../directives/credit-card-number.directive";
+import {ListCardsComponent} from "../components/list-cards/list-cards.component";
+import {AddCardComponent} from "../components/add-card/add-card.component";
 
 @NgModule({
     declarations: [
