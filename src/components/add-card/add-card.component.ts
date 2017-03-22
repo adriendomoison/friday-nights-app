@@ -1,6 +1,14 @@
 import {Component, OnInit, ViewChildren} from '@angular/core';
-import {CustomerCardInfo, PaymentService, PaymentCard} from "../../services/payment.service";
+import {PaymentCardInfo, PaymentService} from "../../services/payment.service";
 import {AccountService} from "../../services/account.service";
+
+class PaymentCard {
+    cardName: string;
+    cardNumber: string;
+    expiryDate: string;
+    cvc: string;
+    email: string;
+}
 
 @Component({
     selector: 'add-card',
@@ -55,7 +63,7 @@ export class AddCardComponent implements OnInit {
             cvc: this.paymentCard.cvc
         }, (status: number, response: any) => {
             if (status === 200) {
-                this.paymentService.createCustomer(new CustomerCardInfo(
+                this.paymentService.createCustomer(new PaymentCardInfo(
                     this.paymentCard.email,
                     this.paymentCard.cardName,
                     this.paymentCard.cardNumber,

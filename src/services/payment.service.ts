@@ -11,21 +11,8 @@ export class Payment {
     currency: string
 }
 
-export class PaymentCard {
-    cardName: string;
-    cardNumber: string;
-    expiryDate: string;
-    cvc: string;
-    email: string;
-}
-
 export class PaymentCardInfo {
     public_id: string;
-    name: string;
-    number: string;
-}
-
-export class CustomerCardInfo {
     constructor(public email: string, public name: string, public number: string, public token_id: string) {
     }
 }
@@ -47,9 +34,17 @@ export class PaymentService {
             .catch(this.handleError);
     }
 
-    createCustomer(cardInfo: CustomerCardInfo): Promise<CustomerCardInfo> {
+    createCustomer(cardInfo: PaymentCardInfo): Promise<PaymentCardInfo> {
         return this.http
             .post(this.serviceURL + '/payment/cards', JSON.stringify(cardInfo), {headers: this.headers})
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
+    }
+
+    createCardCharge(card: PaymentCardInfo): Promise<PaymentCardInfo> {
+        return this.http
+            .post(this.serviceURL + '/payment/cards', JSON.stringify(card), {headers: this.headers})
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
