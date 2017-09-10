@@ -1,2 +1,2 @@
-# friday-nights-international-bible-study
-The official app for friday nights bible studies of cal state university san marcos
+# Friday Nights - International Bible Study
+The official app for friday nights bible studies of California State University San Marcos!
