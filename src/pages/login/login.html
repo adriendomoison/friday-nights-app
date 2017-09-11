@@ -1,0 +1,23 @@
+<ion-content padding no-bounce>
+  <div>
+    <ion-item>
+      <ion-input type="text" placeholder="Username" [(ngModel)]="credentials.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="credentials.password"></ion-input>
+    </ion-item>
+
+    <br/>
+
+    <button ion-button full (click)="signIn()">Login</button>
+
+    <hr/>
+
+    <button ion-button full class="fb-btn" (click)="facebookLogin()">
+      <i class="fa fa-facebook" aria-hidden="true"></i>&nbsp;&nbsp;Login with facebook
+    </button>
+
+    <button ion-button full clear (click)="openSignUpPage()">Don't have an account?</button>
+  </div>
+</ion-content>

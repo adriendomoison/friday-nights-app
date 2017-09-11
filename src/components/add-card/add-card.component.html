@@ -1,0 +1,38 @@
+<div class="card-card">
+  <p class="title">Add a credit card</p>
+
+  <div class="form-group row card-edit-line-dark">
+    <span class="card-label">Card name</span>
+    <input #cardName type="text" class="form-control card-name" name="card-name" placeholder="John Doe"
+           maxlength="20" [(ngModel)]="paymentCard.cardName">
+  </div>
+  <div class="form-group row card-edit-line">
+    <span class="card-label">Card number</span>
+    <input #cardNumber type="text" class="form-control card-number" name="card-number"
+           placeholder="4111 1111 1111 1111"
+           maxlength="19" [(ngModel)]="paymentCard.cardNumber" formatCreditCardNumber>
+    <span class="card-label">
+            <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
+            <i class="fa fa-cc-visa" aria-hidden="true"></i>
+        </span>
+  </div>
+
+  <div class="row card-edit-line">
+    <div class="form-group row">
+      <span class="card-label">Expiry</span>
+      <input #expiryDate type="text" class="form-control card-expiration" name="expiry-month"
+             placeholder="MM / YY"
+             maxlength="7" [(ngModel)]="paymentCard.expiryDate" formatCreditCardExpiration>
+    </div>
+
+    <div class="form-group row">
+      <span class="card-label">CVC</span>
+      <input #cvc type="text" class="form-control card-cvc" name="cvc" placeholder="123" maxlength="4"
+             [(ngModel)]="paymentCard.cvc">
+    </div>
+  </div>
+
+  <button class="add-btn" ion-button full (click)="getToken()">
+    <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Add card
+  </button>
+</div>

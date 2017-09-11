@@ -1,0 +1,95 @@
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.card-name {
+  color: white;
+  background-color: #1E2148;
+  border: none;
+  margin-left: 10px;
+  width: 200px;
+}
+
+.card-number {
+  color: white;
+  background-color: #242852;
+  border: none;
+  margin-left: 10px;
+  width: 180px;
+}
+
+.card-expiration {
+  color: white;
+  background-color: #242852;
+  border: none;
+  margin-left: 10px;
+  width: 80px;
+}
+
+.card-cvc {
+  color: white;
+  background-color: #242852;
+  border: none;
+  margin-left: 10px;
+  width: 70px;
+}
+
+.card-label {
+  margin-left: 10px;
+  color: white;
+  opacity: 0.5;
+  line-height: 34px;
+}
+
+.card-edit-line {
+  padding: 10px;
+  background-color: #242852;
+}
+
+.card-edit-line-dark {
+  padding: 10px;
+  background-color: #1E2148;
+}
+
+.card-block {
+  width: 150px;
+}
+
+.card-card {
+  padding-top: 15px;
+  width: 100%;
+  background-color: #171A3D;
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.2;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: white;
+  opacity: 0.2;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 0.2;
+}
+
+input:-ms-input-placeholder {
+  color: white;
+  opacity: 0.2;
+}
+
+.add-btn {
+  margin-top: 30px;
+  color: white;
+  background-color: #13C1BF;
+}
+
+.title {
+  color: #13C1BF;
+  text-align: center;
+  font-size: 25px;
+}
