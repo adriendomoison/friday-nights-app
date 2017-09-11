@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * Check out https://googlechrome.github.io/sw-toolbox/ for
+=======
+ * Check out https://googlechrome.github.io/sw-toolbox/docs/master/index.html for
+>>>>>>> 241e5dc40f3a1dee699642f0135cf86443061883
  * more info on how to use sw-toolbox to custom configure your service worker.
  */
 

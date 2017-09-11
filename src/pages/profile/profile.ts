@@ -8,7 +8,6 @@ import {Profile, ProfileService} from '../../services/profile.service';
   selector: 'page-profile',
   templateUrl: 'profile.html',
   providers: [ProfileService],
-
 })
 export class ProfilePage {
 
