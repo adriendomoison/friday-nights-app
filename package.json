@@ -1,7 +1,7 @@
 {
   "name": "ionic-boot",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Adrien Domoison",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -47,7 +47,7 @@
     "@ionic/app-scripts": "2.1.4",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project",
+  "description": "An Ionic Boot with Signup, Login, Profile, Payment and Settings",
   "cordova": {
     "plugins": {
       "cordova-plugin-console": {},

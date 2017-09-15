@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {AccountService, Credentials, FacebookCredentials} from '../../services/account.service';
 import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
@@ -23,7 +23,6 @@ export class LoginPage {
   wrong_credentials: boolean;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               private accountService: AccountService,
               private fb: FacebookService) {
     this.wrong_credentials = false;
