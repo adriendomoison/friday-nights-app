@@ -11,7 +11,7 @@
     <ion-list id="profile">
       <ion-item>
         <p style="font-size: large; font-weight: 400; font-style: italic; white-space: normal">
-          Next friday night: <span style="font-weight: bolder;">{{next_friday_night_date}}</span>
+          Next friday night: <span style="font-weight: bolder;">{{next_event_date}}</span>
         </p>
       </ion-item>
       <ion-item color="none" id="avatar">
@@ -25,12 +25,12 @@
       <ion-item id="attendance">
         <ion-label style="white-space: normal">
           Are you coming friday?
-          <strong>
-            <span *ngIf="user.next_friday_attendance_status == true" style="color: #388E3C">YES</span>
-            <span *ngIf="user.next_friday_attendance_status == false" style="color: #f44336">NO</span>
-          </strong>
+          <!--<strong>-->
+            <!--<span *ngIf="user.next_event_attendance_status == true" style="color: #388E3C">YES</span>-->
+            <!--<span *ngIf="user.next_event_attendance_status == false" style="color: #f44336">NO</span>-->
+          <!--</strong>-->
         </ion-label>
-        <ion-toggle (ngModelChange)="updateAttendance()" [(ngModel)]="user.next_friday_attendance_status"></ion-toggle>
+        <ion-toggle (ngModelChange)="updateAttendance()" [(ngModel)]="user.next_event_attendance_status"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-card>

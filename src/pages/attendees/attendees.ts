@@ -11,12 +11,12 @@ export class AttendeesPage implements OnInit {
 
   attendees: Attendee[] = [];
   user: Attendee = new Attendee;
-  next_friday_night_date: string;
+  next_event_date: string;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               private attendeeService: AttendeeService) {
-    this.next_friday_night_date = '...';
+    this.next_event_date = '...';
   }
 
   ngOnInit(): void {
@@ -33,14 +33,14 @@ export class AttendeesPage implements OnInit {
   }
 
   updateAttendance(): void {
-    this.user.next_friday_attendance_status
+    this.user.next_event_attendance_status
       ? this.attendeeService.deleteAttendance().catch(() => {
       this.presentToastServerError();
-      this.user.next_friday_attendance_status = true;
+      this.user.next_event_attendance_status = true;
     })
       : this.attendeeService.setAttendance().catch(() => {
       this.presentToastServerError();
-      this.user.next_friday_attendance_status = false;
+      this.user.next_event_attendance_status = false;
     })
   }
 

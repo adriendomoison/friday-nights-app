@@ -9,7 +9,7 @@ export class Attendee {
   first_name: string;
   last_name: string;
   profile_picture_url: string;
-  next_friday_attendance_status: boolean;
+  next_event_attendance_status: boolean;
 }
 
 @Injectable()
