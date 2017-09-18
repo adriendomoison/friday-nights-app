@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://api.golang-api-boot.dev:14000',
-  FACEBOOK_CLIENT_ID: '1289745914454298'
+  API_URL: 'http://api.fridaynights.dev:14000',
+  FACEBOOK_CLIENT_ID: '101751850574000'
 };

@@ -5,14 +5,13 @@ import {SettingsPage} from '../pages/settings/settings';
 import {LoginPage} from '../pages/login/login';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
-import {TabsControllerPage} from '../pages/tabs-controller/tabs-controller';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage: any = TabsControllerPage;
+  rootPage: any = LoginPage;
 
   @ViewChild(Nav) nav;
 

@@ -1,5 +1,5 @@
 {
-  "name": "ionic-boot",
+  "name": "fridaynights",
   "version": "0.0.1",
   "author": "Adrien Domoison",
   "homepage": "http://ionicframework.com/",
@@ -34,6 +34,7 @@
     "cordova-ios": "^4.4.0",
     "cordova-plugin-console": "^1.0.5",
     "cordova-plugin-device": "^1.1.4",
+    "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-statusbar": "^2.2.2",
     "cordova-plugin-whitelist": "^1.3.1",
@@ -53,7 +54,7 @@
     "@ionic/app-scripts": "2.1.4",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic Boot with Signup, Login, Profile, Payment and Settings",
+  "description": "Friday Nights App",
   "cordova": {
     "plugins": {
       "cordova-plugin-console": {},
@@ -63,7 +64,11 @@
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
       "mx.ferreyra.callnumber": {},
-      "cordova-sms-plugin": {}
+      "cordova-sms-plugin": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "101751850574000",
+        "APP_NAME": "FridayNights"
+      }
     },
     "platforms": [
       "android",

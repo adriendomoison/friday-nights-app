@@ -5,7 +5,7 @@ import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
 import {HomePage} from '../home/home';
 import {SignUpPage} from '../sign-up/sign-up';
-import {UpdatesPage} from '../updates/updates';
+import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 
 /*
  Generated class for the Login page.
@@ -46,19 +46,19 @@ export class LoginPage {
   signIn(): void {
     this.accountService.signIn(this.credentials)
       .then(() => {
-        this.navCtrl.setRoot(UpdatesPage);
+        this.navCtrl.setRoot(TabsControllerPage);
       }, () => {
       })
   }
 
   facebookLogin(): void {
     this.fb.login({
-      scope: 'public_profile,email,user_birthday,user_about_me'
+      scope: 'public_profile,email,user_birthday,user_hometown'
     }).then(
       (response) => {
         this.accountService.facebookSignIn(new FacebookCredentials(response.authResponse.userID, response.authResponse.accessToken))
           .then(() => {
-            this.navCtrl.setRoot(UpdatesPage);
+            this.navCtrl.setRoot(TabsControllerPage);
           }, () => {
           })
       }, (error: any) => console.error(error)
