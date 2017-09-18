@@ -5,6 +5,7 @@ import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
 import {HomePage} from '../home/home';
 import {SignUpPage} from '../sign-up/sign-up';
+import {UpdatesPage} from '../updates/updates';
 
 /*
  Generated class for the Login page.
@@ -42,14 +43,10 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  openSignUpPage(): void {
-    this.navCtrl.setRoot(SignUpPage);
-  }
-
   signIn(): void {
     this.accountService.signIn(this.credentials)
       .then(() => {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(UpdatesPage);
       }, () => {
       })
   }
@@ -61,7 +58,7 @@ export class LoginPage {
       (response) => {
         this.accountService.facebookSignIn(new FacebookCredentials(response.authResponse.userID, response.authResponse.accessToken))
           .then(() => {
-            this.navCtrl.setRoot(HomePage);
+            this.navCtrl.setRoot(UpdatesPage);
           }, () => {
           })
       }, (error: any) => console.error(error)

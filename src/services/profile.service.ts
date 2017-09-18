@@ -8,8 +8,8 @@ export class Profile {
   public_id: string;
   first_name: string;
   last_name: string;
-  picture_cloudinary_id: string;
-  picture_url: string;
+  profile_picture_cloudinary_id: string;
+  profile_picture_url: string;
   description: string;
 }
 
@@ -29,7 +29,6 @@ export class ProfileService {
       .then(response => response.json() as Profile)
       .catch(this.handleError);
   }
-
 
   updateProfile(profile: Profile): Promise<Profile> {
     const url = `${environment.API_URL}/api/v1/user/profile`;

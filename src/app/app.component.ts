@@ -1,18 +1,18 @@
 import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
-import {LoadingPage} from '../pages/loading/loading';
 import {AccountService} from '../services/account.service';
 import {SettingsPage} from '../pages/settings/settings';
 import {LoginPage} from '../pages/login/login';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
+import {TabsControllerPage} from '../pages/tabs-controller/tabs-controller';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage: any = LoadingPage;
+  rootPage: any = TabsControllerPage;
 
   @ViewChild(Nav) nav;
 

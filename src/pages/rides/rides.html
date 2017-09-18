@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Rides
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="rides">
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <div>
+          <p style="margin-top:0;color:#000000; white-space: normal">
+            Rides to Ruth and Milt&#39;s house at
+            <strong>
+              5:30pm from Craven Circle (library circle).
+            </strong>
+          </p>
+        </div>
+      </ion-item>
+
+      <div *ngIf="driversToGoToRuth > 0;else no_content_for_drivers_to_go_to_ruth">
+        <driver *ngFor="let driver of driversToGoToRuth" [driver]="driver"></driver>
+      </div>
+
+      <ng-template #no_content_for_drivers_to_go_to_ruth>
+        <ion-item>
+          <p style="font-size: large; font-weight: 100; text-align: center; white-space: normal">
+            No rides available yet
+            <img style="width: 128px; padding: 15px; margin: auto;" src="assets/images/ride_to_ruth.png"/>
+          </p>
+        </ion-item>
+      </ng-template>
+
+      <div *ngIf="!needARide[RideType.GoToRuth] && !canDrive[RideType.GoToRuth]">
+        <ion-col>
+          <button (click)="addRider(RideType.GoToRuth)" ion-button icon-left clear style="color: #388E3C">
+            <ion-icon name="navigate"></ion-icon>
+            <div>
+              I need a ride
+            </div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button (click)="addDriver(RideType.GoToRuth)" ion-button icon-left clear style="color: #f44336">
+            <ion-icon name="car"></ion-icon>
+            <div>
+              I have a car
+            </div>
+          </button>
+        </ion-col>
+      </div>
+
+      <ion-col *ngIf="needARide[RideType.GoToRuth]">
+        <button (click)="needARide[RideType.GoToRuth] = false" ion-button icon-left clear style="color: #9E9E9E">
+          <ion-icon name="close"></ion-icon>
+          <div>Cancel ride request</div>
+        </button>
+      </ion-col>
+
+      <ion-col *ngIf="canDrive[RideType.GoToRuth]">
+        <button (click)="canDrive[RideType.GoToRuth] = false" ion-button icon-left clear style="color: #9E9E9E">
+          <ion-icon name="close"></ion-icon>
+          <div>Remove my car</div>
+        </button>
+      </ion-col>
+
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <div>
+          <p style="margin-top:0; color:#000000; white-space: normal">
+            Rides home start at
+            <strong>
+              10:00pm
+            </strong>
+          </p>
+        </div>
+      </ion-item>
+
+      <div *ngIf="driversToGoHome > 0;else no_content_for_drivers_to_go_home">
+        <driver *ngFor="let driver of driversToGoHome" [driver]="driver"></driver>
+      </div>
+
+      <ng-template #no_content_for_drivers_to_go_home>
+        <ion-item>
+          <p style="font-size: large; font-weight: 100; text-align: center; white-space: normal">
+            No rides available yet
+            <img style="width: 128px; padding: 15px; margin: auto" src="assets/images/ride_home.png"/>
+          </p>
+        </ion-item>
+      </ng-template>
+
+      <div *ngIf="!needARide[RideType.GoHome] && !canDrive[RideType.GoHome]">
+        <ion-col>
+          <button (click)="addRider(RideType.GoHome)" ion-button icon-left clear style="color: #388E3C">
+            <ion-icon name="navigate"></ion-icon>
+            <div>
+              I need a ride
+            </div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button (click)="addDriver(RideType.GoHome)" ion-button icon-left clear style="color: #f44336">
+            <ion-icon name="car"></ion-icon>
+            <div>
+              I have a car
+            </div>
+          </button>
+        </ion-col>
+      </div>
+
+      <ion-col *ngIf="needARide[RideType.GoHome]">
+        <button (click)="needARide[RideType.GoHome] = false" ion-button icon-left clear style="color: #9E9E9E">
+          <ion-icon name="close"></ion-icon>
+          <div>Cancel ride request</div>
+        </button>
+      </ion-col>
+
+      <ion-col *ngIf="canDrive[RideType.GoHome]">
+        <button (click)="canDrive[RideType.GoHome] = false" ion-button icon-left clear style="color: #9E9E9E">
+          <ion-icon name="close"></ion-icon>
+          <div>Remove my car</div>
+        </button>
+      </ion-col>
+
+    </ion-list>
+  </ion-card>
+</ion-content>
