@@ -161,7 +161,7 @@ export class AccountService {
       .toPromise()
       .then(res => {
         this.auth = res.json() as Auth;
-        this.isConnected = true;
+        this.isConnected = res.status == 200;
       })
       .catch(this.handleError);
   }

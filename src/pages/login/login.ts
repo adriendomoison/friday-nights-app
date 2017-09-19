@@ -31,16 +31,19 @@ export class LoginPage {
   }
 
   ngOnInit() {
-    let fbParams: FacebookInitParams = {
-      appId: environment.FACEBOOK_CLIENT_ID,
-      xfbml: true,
-      version: 'v2.8'
-    };
-    this.fb.init(fbParams);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    return this.accountService.retrieveAccessToken()
+      .then(() => {
+        if (this.accountService.isConnected)
+          this.navCtrl.setRoot(TabsControllerPage)
+      })
+      .catch(() => {
+        let fbParams: FacebookInitParams = {
+          appId: environment.FACEBOOK_CLIENT_ID,
+          xfbml: true,
+          version: 'v2.8'
+        };
+        this.fb.init(fbParams);
+      });
   }
 
   signIn(): void {

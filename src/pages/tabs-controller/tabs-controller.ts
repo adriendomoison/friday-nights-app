@@ -3,6 +3,8 @@ import {NavController} from 'ionic-angular';
 import {UpdatesPage} from '../updates/updates';
 import {AttendeesPage} from '../attendees/attendees';
 import {RidesPage} from '../rides/rides';
+import {AccountService} from '../../services/account.service';
+import {LoginPage} from '../login/login';
 
 @Component({
   selector: 'page-tabs-controller',
@@ -14,16 +16,15 @@ export class TabsControllerPage {
   tab2Root: any = UpdatesPage;
   tab3Root: any = AttendeesPage;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private accountService: AccountService) {
   }
 
-  goToUpdates(params) {
-    if (!params) params = {};
-    this.navCtrl.push(UpdatesPage);
-  }
-
-  goToAttendees(params) {
-    if (!params) params = {};
-    this.navCtrl.push(AttendeesPage);
+  ngOnInit() {
+    return this.accountService.retrieveAccessToken()
+      .then(() => {
+        if (!this.accountService.isConnected)
+          this.navCtrl.setRoot(LoginPage);
+      })
   }
 }
