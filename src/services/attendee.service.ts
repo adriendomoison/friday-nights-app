@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {environment} from '../environments/environment';
+import {AccountService} from './account.service';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -18,7 +19,7 @@ export class AttendeeService {
   private serviceURL = environment.API_URL + '/api/v1/attendees';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private accountService: AccountService) {
   }
 
   getAttendees(): Promise<Attendee[]> {
@@ -30,7 +31,8 @@ export class AttendeeService {
 
   getAttendee(): Promise<Attendee> {
     const url = `${this.serviceURL}/me`;
-    return this.http.get(url, {headers: this.headers})
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
+    return this.http.get(url, {headers: this.headers, withCredentials: true})
       .toPromise()
       .then(response => response.json() as Attendee)
       .catch(this.handleError);
@@ -38,8 +40,9 @@ export class AttendeeService {
 
   setAttendance(): Promise<void> {
     const url = `${this.serviceURL}/me`;
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
-      .put(url, {}, {headers: this.headers})
+      .post(url, {}, {headers: this.headers, withCredentials: true})
       .toPromise()
       .then(response => response.json() as Attendee)
       .catch(this.handleError);
@@ -47,7 +50,8 @@ export class AttendeeService {
 
   deleteAttendance(): Promise<void> {
     const url = `${this.serviceURL}/me`;
-    return this.http.delete(url, {headers: this.headers})
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
+    return this.http.delete(url, {headers: this.headers, withCredentials: true})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

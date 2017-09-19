@@ -79,7 +79,7 @@ export class AccountService {
     let params: URLSearchParams = new URLSearchParams();
     params.set('email', credentials.username);
     params.set('password', credentials.password);
-    params.set('client_id', 'apigo');
+    params.set('client_id', 'fridaynights');
 
     return this.http
       .get(url, {search: params, headers: this.headers})

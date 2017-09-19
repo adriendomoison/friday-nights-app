@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {Attendee, AttendeeService} from '../../services/attendee.service';
+import {LoginPage} from '../login/login';
+import {AccountService} from '../../services/account.service';
 
 @Component({
   selector: 'page-attendees',
@@ -14,21 +16,29 @@ export class AttendeesPage implements OnInit {
   next_event_date: string;
 
   constructor(public navCtrl: NavController,
+              public accountService: AccountService,
               public toastCtrl: ToastController,
               private attendeeService: AttendeeService) {
     this.next_event_date = '...';
   }
 
   ngOnInit(): void {
-    this.attendeeService.getAttendee()
-      .then(user => {
-        this.user = user
-      })
-      .catch(() => {
-      });
-    this.attendeeService.getAttendees()
-      .then(attendees => this.attendees = attendees)
-      .catch(() => {
+    this.accountService.retrieveAccessToken()
+      .then(() => {
+        if (!this.accountService.isConnected)
+          this.navCtrl.setRoot(LoginPage);
+        else {
+          this.attendeeService.getAttendee()
+            .then(user => {
+              this.user = user;
+            })
+            .catch(() => {
+            });
+          this.attendeeService.getAttendees()
+            .then(attendees => this.attendees = attendees)
+            .catch(() => {
+            });
+        }
       });
   }
 
