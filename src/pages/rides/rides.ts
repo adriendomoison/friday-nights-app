@@ -8,7 +8,7 @@ import {RiderService} from '../../services/rider.service';
   templateUrl: 'rides.html',
   providers: [DriverService, RiderService]
 })
-export class RidesPage implements OnInit {
+export class RidesPage {
 
   RideType: typeof RideType = RideType;
   driversToGoToRuth: Driver[] = [];
@@ -22,7 +22,7 @@ export class RidesPage implements OnInit {
               private driverService: DriverService) {
   }
 
-  ngOnInit(): void {
+  ionViewDidEnter() {
     this.driverService.getDrivers(RideType.GoToRuth)
       .then(drivers => this.driversToGoToRuth = drivers)
       .catch(() => {
@@ -30,8 +30,7 @@ export class RidesPage implements OnInit {
     this.driverService.getDrivers(RideType.GoHome)
       .then(drivers => this.driversToGoHome = drivers)
       .catch(() => {
-      });
-  }
+      });  }
 
   addDriver(rideType: RideType, number_of_seat: number): void {
     this.canDrive[rideType] = true;
@@ -63,7 +62,8 @@ export class RidesPage implements OnInit {
   presentToastServerError() {
     let toast = this.toastCtrl.create({
       message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
-      duration: 5000
+      duration: 5000,
+      position: 'top'
     });
     toast.present();
   }

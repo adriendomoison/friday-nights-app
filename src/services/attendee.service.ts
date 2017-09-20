@@ -9,6 +9,7 @@ export class Attendee {
   public_id: string;
   first_name: string;
   last_name: string;
+  home_country: string;
   profile_picture_url: string;
   next_event_attendance_status: boolean;
 }

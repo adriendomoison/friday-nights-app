@@ -22,7 +22,7 @@
     </ion-list>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="!isRegistered">
     <ion-list>
       <div class="center-cropped"></div>
       <ion-item>
@@ -49,13 +49,7 @@
       <ion-col>
         <button (click)="setAttendanceToYes()" ion-button icon-left clear style="color: #388E3C">
           <ion-icon name="checkmark"></ion-icon>
-          <div>Yes</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button (click)="setAttendanceToNo()" ion-button icon-left clear style="color: #9E9E9E">
-          <ion-icon name="close"></ion-icon>
-          <div>Not this Friday</div>
+          <div>Yes, I love Friday nights!</div>
         </button>
       </ion-col>
     </ion-list>
