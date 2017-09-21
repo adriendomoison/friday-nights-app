@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {environment} from '../environments/environment';
+import {NativeStorage} from '@ionic-native/native-storage';
 import 'rxjs/add/operator/toPromise';
 
 export class Auth {
@@ -18,6 +19,11 @@ export class Credentials {
 export class Account {
   username: string;
   picture: string;
+}
+
+export class UserNotificationToken {
+  constructor(public email: string, public push_notification_token: string) {
+  }
 }
 
 export class User {
@@ -51,12 +57,32 @@ export class AccountService {
   private account = new Account();
   public isConnected: boolean;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private nativeStorage: NativeStorage) {
     this.isConnected = false;
   }
 
   getAuth(): Auth {
     return this.auth
+  }
+
+  connectFromRefreshToken(refresh_token: string): Promise<void> {
+    const url = `${environment.API_URL}/appauth/refresh`;
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('code', refresh_token);
+
+    return this.http
+      .get(url, {search: params, headers: this.headers})
+      .toPromise()
+      .then(res => {
+        this.auth = res.json() as Auth;
+        this.isConnected = true;
+        return this.saveAccessToken()
+          .then(() => {
+            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
+          });
+      })
+      .catch(this.handleError);
   }
 
   facebookSignIn(credentials: FacebookCredentials): Promise<void> {
@@ -68,7 +94,9 @@ export class AccountService {
         this.auth = res.json() as Auth;
         this.isConnected = true;
         return this.saveAccessToken()
-          .then();
+          .then(() => {
+            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
+          });
       })
       .catch(this.handleError);
   }
@@ -88,7 +116,9 @@ export class AccountService {
         this.auth = res.json() as Auth;
         this.isConnected = true;
         return this.saveAccessToken()
-          .then();
+          .then(() => {
+            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
+          });
       })
       .catch(this.handleError);
   }
@@ -176,6 +206,16 @@ export class AccountService {
       .toPromise()
       .then(() => {
       })
+  }
+
+  updateNotificationToken(userNotificationToken: UserNotificationToken): Promise<User> {
+    const url = `${environment.API_URL}/api/v1/user/notification-token`;
+    this.headers.set('Authorization', 'Bearer ' + this.getAuth().access_token);
+    return this.http
+      .put(url, JSON.stringify(userNotificationToken), {headers: this.headers, withCredentials: true})
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

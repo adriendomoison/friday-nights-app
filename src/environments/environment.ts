@@ -4,7 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  API_URL: 'http://api.fridaynights.dev:14000',
-  FACEBOOK_CLIENT_ID: '101751850574000'
+  production: true,
+  API_URL: 'https://fridaynights-api.herokuapp.com',
+  // production: false,
+  // API_URL: 'http://api.fridaynights.dev:14000',
+  FACEBOOK_CLIENT_ID: '1728222270815747'
 };

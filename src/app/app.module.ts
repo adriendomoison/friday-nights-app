@@ -18,6 +18,12 @@ import {AttendeeComponent} from '../components/attendee/attendee';
 import {RidesPage} from '../pages/rides/rides';
 import {AttendeesPage} from '../pages/attendees/attendees';
 import {UpdatesPage} from '../pages/updates/updates';
+import {NativeStorage} from '@ionic-native/native-storage';
+import {Facebook} from '@ionic-native/facebook';
+import {FacebookService} from 'ng2-facebook-sdk';
+import {SMS} from '@ionic-native/sms';
+import {CallNumber} from '@ionic-native/call-number';
+import {Push} from '@ionic-native/push';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,12 @@ import {UpdatesPage} from '../pages/updates/updates';
     AccountService,
     StatusBar,
     SplashScreen,
+    NativeStorage,
+    Facebook,
+    FacebookService,
+    SMS,
+    CallNumber,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

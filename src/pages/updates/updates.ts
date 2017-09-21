@@ -9,7 +9,7 @@ import {AccountService} from '../../services/account.service';
 @Component({
   selector: 'page-updates',
   templateUrl: 'updates.html',
-  providers: [CallNumber, SMS, AttendeeService]
+  providers: [AttendeeService]
 })
 export class UpdatesPage {
 
@@ -34,12 +34,13 @@ export class UpdatesPage {
         else {
           this.fetchProfile();
         }
-      });  }
+      });
+  }
 
   fetchProfile(): void {
     this.attendeeService.getAttendee()
       .then(user => {
-         this.isRegistered = user.next_event_attendance_status;
+        this.isRegistered = user.next_event_attendance_status;
       })
       .catch(() => {
       });
@@ -79,8 +80,8 @@ export class UpdatesPage {
   setAttendanceToYes(): void {
     this.attendeeService.setAttendance()
       .then(() => {
-      this.isRegistered = true;
-      this.presentToastRegistrationSuccess();
+        this.isRegistered = true;
+        this.presentToastRegistrationSuccess();
       })
       .catch(() => this.presentToastServerError())
   }

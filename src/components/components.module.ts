@@ -1,16 +1,8 @@
 import {NgModule} from '@angular/core';
-import {AttendeeComponent} from './attendee/attendee';
-import {DriverComponent} from './driver/driver';
 @NgModule({
-  declarations: [
-    AttendeeComponent,
-    DriverComponent
-  ],
+  declarations: [],
   imports: [],
-  exports: [
-    AttendeeComponent,
-    DriverComponent
-  ]
+  exports: []
 })
 export class ComponentsModule {
 }
