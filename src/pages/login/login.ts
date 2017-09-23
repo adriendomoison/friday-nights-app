@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
+import {NavController, Platform, ToastController} from 'ionic-angular';
 import {AccountService, Credentials, FacebookCredentials} from '../../services/account.service';
 import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
@@ -19,21 +19,10 @@ export class LoginPage {
 
   constructor(public plt: Platform,
               public navCtrl: NavController,
+              public toastCtrl: ToastController,
               private facebook: Facebook,
               private accountService: AccountService,
               private fb: FacebookService) {
-  }
-
-  ngOnInit() {
-
-  }
-
-  signIn(): void {
-    this.accountService.signIn(this.credentials)
-      .then(() => {
-        this.navCtrl.setRoot(TabsControllerPage);
-      }, () => {
-      })
   }
 
   facebookLogin(): void {
@@ -68,6 +57,18 @@ export class LoginPage {
   login(response): void {
     this.accountService.facebookSignIn(new FacebookCredentials(response.authResponse.userID, response.authResponse.accessToken))
       .then(() => this.navCtrl.setRoot(TabsControllerPage))
-      .catch(() => this.loginProcess = false)
+      .catch(() => {
+        this.presentToastServerError();
+        this.loginProcess = false
+      })
+  }
+
+  presentToastServerError() {
+    let toast = this.toastCtrl.create({
+      message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
+      duration: 5000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

@@ -34,7 +34,7 @@ export class ProfileService {
     const url = `${environment.API_URL}/api/v1/user/profile`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
-      .put(url, JSON.stringify(profile), {headers: this.headers, withCredentials: true})
+      .put(url, JSON.stringify(profile), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Profile)
       .catch(this.handleError);

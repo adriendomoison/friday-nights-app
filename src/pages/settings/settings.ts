@@ -30,20 +30,11 @@ export class SettingsPage {
   }
 
   ngOnInit() {
-    this.accountService.retrieveAccessToken()
-      .then(() => {
-        this.accountService.getCurrentUser()
-          .then(user => {
-            this.user = user;
-            this.userChangePassword.email = this.user.email
-          })
+    this.accountService.getCurrentUser()
+      .then(user => {
+        this.user = user;
+        this.userChangePassword.email = this.user.email
       })
-      .catch(() => {
-      })
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
   }
 
   updateBasicInfo(): void {

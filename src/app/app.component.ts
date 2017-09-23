@@ -14,7 +14,7 @@ import {Push, PushObject, PushOptions} from '@ionic-native/push';
 })
 export class MyApp {
 
-  rootPage: any = LoginPage;
+  rootPage: any;
 
   @ViewChild(Nav) nav;
 
@@ -30,12 +30,16 @@ export class MyApp {
         .then(data => {
           this.accountService.connectFromRefreshToken(data.refresh_token).then(() => {
             this.initPushNotification();
+            this.splashScreen.hide();
+            this.nav.setRoot(TabsControllerPage)
           }).catch(() => {
             this.splashScreen.hide();
+            this.nav.setRoot(LoginPage)
           });
         })
         .catch(() => {
           this.splashScreen.hide();
+          this.nav.setRoot(LoginPage)
         });
     });
   }

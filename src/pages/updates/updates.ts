@@ -27,14 +27,11 @@ export class UpdatesPage {
   }
 
   ionViewDidEnter() {
-    this.accountService.retrieveAccessToken()
-      .then(() => {
-        if (!this.accountService.isConnected)
-          this.navCtrl.setRoot(LoginPage);
-        else {
-          this.fetchProfile();
-        }
-      });
+    if (!this.accountService.isConnected)
+      this.navCtrl.setRoot(LoginPage);
+    else {
+      this.fetchProfile();
+    }
   }
 
   fetchProfile(): void {

@@ -21,20 +21,14 @@ export class ProfilePage {
     this.profile = new Profile()
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
-
   ngOnInit() {
-    this.accountService.retrieveAccessToken().then(() => {
-      this.accountService.getCurrentUser()
-        .then(user => {
-          this.profileService.getProfile(user.profile_public_id)
-            .then(profile => {
-              this.profile = profile;
-            });
-        });
-    });
+    this.accountService.getCurrentUser()
+      .then(user => {
+        this.profileService.getProfile(user.profile_public_id)
+          .then(profile => {
+            this.profile = profile;
+          });
+      });
   }
 
   editDescription(): void {

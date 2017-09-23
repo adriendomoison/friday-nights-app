@@ -33,7 +33,7 @@ export class AttendeeService {
   getAttendee(): Promise<Attendee> {
     const url = `${this.serviceURL}/me`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
-    return this.http.get(url, {headers: this.headers, withCredentials: true})
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Attendee)
       .catch(this.handleError);
@@ -43,7 +43,7 @@ export class AttendeeService {
     const url = `${this.serviceURL}/me`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
-      .post(url, {}, {headers: this.headers, withCredentials: true})
+      .post(url, {}, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Attendee)
       .catch(this.handleError);
@@ -52,7 +52,7 @@ export class AttendeeService {
   deleteAttendance(): Promise<void> {
     const url = `${this.serviceURL}/me`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
-    return this.http.delete(url, {headers: this.headers, withCredentials: true})
+    return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

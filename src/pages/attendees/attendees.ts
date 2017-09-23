@@ -23,15 +23,12 @@ export class AttendeesPage {
   }
 
   ionViewDidEnter() {
-    this.accountService.retrieveAccessToken()
-      .then(() => {
-        if (!this.accountService.isConnected)
-          this.navCtrl.setRoot(LoginPage);
-        else {
-          this.fetchProfile();
-          this.fetchAttendeeList();
-        }
-      });
+    if (!this.accountService.isConnected)
+      this.navCtrl.setRoot(LoginPage);
+    else {
+      this.fetchProfile();
+      this.fetchAttendeeList();
+    }
   }
 
   fetchProfile(): void {

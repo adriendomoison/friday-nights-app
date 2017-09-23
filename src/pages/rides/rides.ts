@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {Driver, DriverService, RideType} from '../../services/driver.service';
 import {RiderService} from '../../services/rider.service';
@@ -30,7 +30,8 @@ export class RidesPage {
     this.driverService.getDrivers(RideType.GoHome)
       .then(drivers => this.driversToGoHome = drivers)
       .catch(() => {
-      });  }
+      });
+  }
 
   addDriver(rideType: RideType, number_of_seat: number): void {
     this.canDrive[rideType] = true;

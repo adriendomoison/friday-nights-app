@@ -21,10 +21,7 @@ export class TabsControllerPage {
   }
 
   ngOnInit() {
-    return this.accountService.retrieveAccessToken()
-      .then(() => {
-        if (!this.accountService.isConnected)
-          this.navCtrl.setRoot(LoginPage);
-      })
+    if (!this.accountService.isConnected)
+      this.navCtrl.setRoot(LoginPage);
   }
 }

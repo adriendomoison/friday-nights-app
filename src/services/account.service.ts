@@ -138,7 +138,7 @@ export class AccountService {
   getCurrentUser(): Promise<User> {
     const url = `${this.API_SERVICE_URL}/user`;
     this.headers.set('Authorization', 'Bearer ' + this.auth.access_token);
-    return this.http.get(url, {headers: this.headers, withCredentials: true})
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
@@ -148,7 +148,7 @@ export class AccountService {
     const url = `${this.API_SERVICE_URL}/user`;
     this.headers.set('Authorization', 'Bearer ' + this.auth.access_token);
     return this.http
-      .put(url, JSON.stringify(user), {headers: this.headers, withCredentials: true})
+      .put(url, JSON.stringify(user), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Account)
       .catch(this.handleError);
@@ -158,7 +158,7 @@ export class AccountService {
     const url = `${this.API_SERVICE_URL}/user/password`;
     this.headers.set('Authorization', 'Bearer ' + this.auth.access_token);
     return this.http
-      .put(url, JSON.stringify(userChangePassword), {headers: this.headers, withCredentials: true})
+      .put(url, JSON.stringify(userChangePassword), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Account)
       .catch(this.handleError);
@@ -167,7 +167,7 @@ export class AccountService {
   deleteUserAccount(): Promise<void> {
     const url = `${this.API_SERVICE_URL}/user`;
     this.headers.set('Authorization', 'Bearer ' + this.auth.access_token);
-    return this.http.delete(url, {headers: this.headers, withCredentials: true})
+    return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then()
       .catch(this.handleError);
@@ -175,8 +175,11 @@ export class AccountService {
 
   disconnect(): Promise<void> {
     const url = `${environment.API_URL}/auth/access-token/delete`;
-    this.headers.set('Authorization', 'Bearer ' + this.auth.access_token);
-    return this.http.get(url, {headers: this.headers, withCredentials: true})
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('access_token', this.auth.access_token);
+
+    return this.http.get(url, {search: params, headers: this.headers})
       .toPromise()
       .then(() => {
         this.auth = new Auth();
@@ -187,7 +190,7 @@ export class AccountService {
 
   retrieveAccessToken(): Promise<void> {
     const url = `${environment.API_URL}/auth/access-token`;
-    return this.http.get(url, {headers: this.headers, withCredentials: true})
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(res => {
         this.auth = res.json() as Auth;
@@ -202,7 +205,7 @@ export class AccountService {
     let params: URLSearchParams = new URLSearchParams();
     params.set('access_token', this.auth.access_token);
 
-    return this.http.get(url, {search: params, headers: this.headers, withCredentials: true})
+    return this.http.get(url, {search: params, headers: this.headers})
       .toPromise()
       .then(() => {
       })
@@ -212,7 +215,7 @@ export class AccountService {
     const url = `${environment.API_URL}/api/v1/user/notification-token`;
     this.headers.set('Authorization', 'Bearer ' + this.getAuth().access_token);
     return this.http
-      .put(url, JSON.stringify(userNotificationToken), {headers: this.headers, withCredentials: true})
+      .put(url, JSON.stringify(userNotificationToken), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
