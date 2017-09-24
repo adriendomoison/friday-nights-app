@@ -14,7 +14,7 @@
     <ion-list id="profile">
       <ion-item>
         <p style="font-size: large; font-weight: 400; font-style: italic; white-space: normal">
-          Next friday night: <span style="font-weight: bolder;">{{next_event_date}}</span>
+          Next friday night: <span style="font-weight: bolder;">{{info.next_event_date || '...'}}</span>
         </p>
       </ion-item>
       <ion-item color="none" id="avatar">
@@ -28,10 +28,6 @@
       <ion-item id="attendance">
         <ion-label style="white-space: normal">
           Are you coming friday?
-          <!--<strong>-->
-            <!--<span *ngIf="user.next_event_attendance_status == true" style="color: #388E3C">YES</span>-->
-            <!--<span *ngIf="user.next_event_attendance_status == false" style="color: #f44336">NO</span>-->
-          <!--</strong>-->
         </ion-label>
         <ion-toggle (ngModelChange)="updateAttendance()" [(ngModel)]="user.next_event_attendance_status"></ion-toggle>
       </ion-item>
@@ -49,18 +45,26 @@
       </ion-item>
 
 
-      <div *ngIf="attendees && attendees.length > 0;else no_content">
-        <attendee id="attendee-list" *ngFor="let attendee of attendees" [attendee]="attendee"></attendee>
+      <div *ngIf="attendees_is_loaded; else not_loaded">
+        <div *ngIf="attendees && attendees.length > 0; else no_content">
+          <attendee id="attendee-list" *ngFor="let attendee of attendees" [attendee]="attendee"></attendee>
+        </div>
+        <ng-template #no_content>
+          <ion-item>
+            <p style="font-size: large; font-weight: 100; text-align: center; white-space: normal">
+              Be the first to let us know you are coming! We love you!
+              <img style="width: 128px; padding: 15px; margin: auto" src="assets/images/nobody_registered.png"/>
+            </p>
+          </ion-item>
+        </ng-template>
       </div>
 
-      <ng-template #no_content>
-        <ion-item>
-          <p style="font-size: large; font-weight: 100; text-align: center; white-space: normal">
-            Be the first to let us know you are coming! We love you!
-            <img style="width: 128px; padding: 15px; margin: auto" src="assets/images/nobody_registered.png"/>
-          </p>
-        </ion-item>
+      <ng-template #not_loaded>
+        <div style="margin: auto; padding-top: 50px; padding-bottom: 120px; width: 50px">
+          <ion-spinner style="display: block; margin: auto" name="crescent"></ion-spinner>
+        </div>
       </ng-template>
+
     </ion-list>
   </ion-card>
 </ion-content>

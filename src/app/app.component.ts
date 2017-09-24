@@ -31,7 +31,7 @@ export class MyApp {
           this.accountService.connectFromRefreshToken(data.refresh_token).then(() => {
             this.initPushNotification();
             this.splashScreen.hide();
-            this.nav.setRoot(TabsControllerPage)
+            this.nav.push(TabsControllerPage);
           }).catch(() => {
             this.splashScreen.hide();
             this.nav.setRoot(LoginPage)

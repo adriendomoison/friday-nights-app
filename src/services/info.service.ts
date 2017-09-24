@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {environment} from '../../environments/environment';
+import {environment} from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 import {Address} from './address.service';
@@ -16,16 +16,16 @@ export class Info {
 @Injectable()
 export class InfoService {
 
-  private serviceURL = environment.API_URL + '/api/v1/infos';
+  private serviceURL = environment.API_URL + '/api/v1/event-infos';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
   }
 
-  getInfos(info_type?: string[]): Promise<Info[]> {
-    return this.http.get(this.serviceURL)
+  getInfo(): Promise<Info> {
+    return this.http.get(`${this.serviceURL}/next-event`)
       .toPromise()
-      .then(response => response.json() as Info[])
+      .then(response => response.json() as Info)
       .catch(this.handleError);
   }
 

@@ -78,9 +78,6 @@ export class AccountService {
         this.auth = res.json() as Auth;
         this.isConnected = true;
         return this.saveAccessToken()
-          .then(() => {
-            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
-          });
       })
       .catch(this.handleError);
   }
@@ -94,9 +91,6 @@ export class AccountService {
         this.auth = res.json() as Auth;
         this.isConnected = true;
         return this.saveAccessToken()
-          .then(() => {
-            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
-          });
       })
       .catch(this.handleError);
   }
@@ -116,9 +110,6 @@ export class AccountService {
         this.auth = res.json() as Auth;
         this.isConnected = true;
         return this.saveAccessToken()
-          .then(() => {
-            this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
-          });
       })
       .catch(this.handleError);
   }
@@ -208,6 +199,7 @@ export class AccountService {
     return this.http.get(url, {search: params, headers: this.headers})
       .toPromise()
       .then(() => {
+        this.nativeStorage.setItem('user', {refresh_token: this.auth.refresh_token}).then();
       })
   }
 
