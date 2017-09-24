@@ -3,32 +3,44 @@ import {NavController, ToastController} from 'ionic-angular';
 import {Attendee, AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
+import {Info, InfoService} from '../../services/info.service';
 
 @Component({
   selector: 'page-attendees',
   templateUrl: 'attendees.html',
-  providers: [AttendeeService]
+  providers: [AttendeeService, InfoService]
 })
 export class AttendeesPage {
 
   attendees: Attendee[] = [];
   user: Attendee = new Attendee;
-  next_event_date: string;
+  info: Info = new Info;
+  attendees_is_loaded: boolean = false;
 
   constructor(public navCtrl: NavController,
               public accountService: AccountService,
+              public infoService: InfoService,
               public toastCtrl: ToastController,
               private attendeeService: AttendeeService) {
-    this.next_event_date = '...';
   }
 
   ionViewDidEnter() {
     if (!this.accountService.isConnected)
       this.navCtrl.setRoot(LoginPage);
     else {
+      this.fetchEventInfo();
       this.fetchProfile();
       this.fetchAttendeeList();
     }
+  }
+
+  fetchEventInfo(): void {
+    this.infoService.getInfo()
+      .then(info => {
+        this.info = info;
+      })
+      .catch(() => {
+      });
   }
 
   fetchProfile(): void {
@@ -42,7 +54,10 @@ export class AttendeesPage {
 
   fetchAttendeeList(): void {
     this.attendeeService.getAttendees()
-      .then(attendees => this.attendees = attendees)
+      .then(attendees => {
+        this.attendees = attendees;
+        this.attendees_is_loaded = true;
+      })
       .catch(() => {
       });
   }

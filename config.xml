@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.pcc.fridaynights" version="v0.1.4 - Nauru" xmlns="http://www.w3.org/ns/widgets">
+<widget id="org.pcc.fridaynights" version="v0.1.5 - Nauru" xmlns="http://www.w3.org/ns/widgets">
     <name>Friday Night</name>
     <description>Official app for Friday Nights International Parties at Ruth and Milt's house!</description>
     <author email="adomoison@gmail.com" href="https://www.linkedin.com/in/adrien-domoison/">Adrien Domoison</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.86:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -16,6 +16,7 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />

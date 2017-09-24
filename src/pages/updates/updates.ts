@@ -16,7 +16,7 @@ export class UpdatesPage {
   private text: string;
   private wantToText: boolean = false;
   private message: string;
-  private isRegistered;
+  private isRegistered = true;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
