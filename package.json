@@ -31,11 +31,11 @@
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
-        "call-number": "file:node_modules/call-number",
+        "call-number": "^1.0.1",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
-        "cordova-ios": "^4.4.0",
-        "cordova-plugin-console": "^1.0.7",
+        "cordova-ios": "^4.5.0",
+        "cordova-plugin-console": "^1.1.0",
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-nativestorage": "^2.2.2",
@@ -73,11 +73,11 @@
             "phonegap-plugin-push": {
                 "SENDER_ID": "797816708457"
             },
-            "mx.ferreyra.callnumber": {},
             "cordova-plugin-facebook4": {
                 "APP_ID": "1728222270815747",
                 "APP_NAME": "fridaynights"
-            }
+            },
+            "mx.ferreyra.callnumber": {}
         },
         "platforms": [
             "android",
