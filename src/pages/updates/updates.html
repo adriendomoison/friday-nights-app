@@ -15,10 +15,9 @@
     <ion-list>
       <ion-item id="updates-list-item-container11">
         <div id="updates-markdown12" class="show-list-numbers-and-dots">
-          <h3 style="line-height:1.8; white-space: normal; font-weight: bold; font-size: medium">Message from Ruth and
-            Milt</h3>
+          <h3 style="line-height:1.8; white-space: normal; font-weight: bold; font-size: medium">Message from Ruth and Milt</h3>
           <p style="margin-top:0;color:#000000; white-space: normal">
-            {{message || '*No message*'}}
+            {{info.message || '*No message*'}}
           </p>
         </div>
       </ion-item>
@@ -32,17 +31,17 @@
         <div id="updates-markdown3" class="show-list-numbers-and-dots">
           <p style="margin-top:0; color:#000000; white-space: normal; line-height: 1.8; font-size: smaller;">
             <strong style="font-size: medium;">
-              Will you attend friday night this week?
+              Will you attend friday night {{info.next_event_date}}?
             </strong>
             <br/>
             <span style="text-decoration: underline; font-weight: bold">When</span>:
             <span>
-              5:30pm - 10:30pm
+              {{info.starting_time || '5:30pm'}}
             </span>
             <br/>
             <span style="text-decoration: underline; font-weight: bold">Where</span>:
             <span>
-              697 Shenandoah Ave. San Marcos, CA 92078 -
+              {{info.location || '697 Shenandoah Ave. San Marcos, CA 92078'}} -
               <a (click)="goToRides()" style="font-style: italic; text-decoration: underline">Request a free ride!</a>
             </span>
           </p>

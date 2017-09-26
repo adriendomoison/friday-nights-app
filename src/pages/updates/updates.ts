@@ -5,21 +5,23 @@ import {SMS} from '@ionic-native/sms';
 import {AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
+import {Info, InfoService} from '../../services/info.service';
 
 @Component({
   selector: 'page-updates',
   templateUrl: 'updates.html',
-  providers: [AttendeeService]
+  providers: [AttendeeService, InfoService]
 })
 export class UpdatesPage {
 
   private text: string;
   private wantToText: boolean = false;
-  private message: string;
+  private info: Info = new Info;
   private isRegistered = true;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
+              public infoService: InfoService,
               private accountService: AccountService,
               private attendeeService: AttendeeService,
               private callNumber: CallNumber,
@@ -30,8 +32,18 @@ export class UpdatesPage {
     if (!this.accountService.isConnected)
       this.navCtrl.setRoot(LoginPage);
     else {
+      this.fetchEventInfo();
       this.fetchProfile();
     }
+  }
+
+  fetchEventInfo(): void {
+    this.infoService.getInfo()
+      .then(info => {
+        this.info = info;
+      })
+      .catch(() => {
+      });
   }
 
   fetchProfile(): void {

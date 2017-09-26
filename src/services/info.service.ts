@@ -10,6 +10,7 @@ export class Info {
   next_event_date: string;
   next_event_start_time: string;
   next_event_address: Address;
+  location: string;
   message: string;
 }
 
