@@ -24,14 +24,14 @@
     </ion-list>
   </ion-card>
 
-  <ion-card *ngIf="!isRegistered">
+  <ion-card *ngIf="!isRegistered && !info.is_past">
     <ion-list>
       <div class="center-cropped"></div>
       <ion-item>
         <div id="updates-markdown3" class="show-list-numbers-and-dots">
           <p style="margin-top:0; color:#000000; white-space: normal; line-height: 1.8; font-size: smaller;">
             <strong style="font-size: medium;">
-              Will you attend friday night {{info.next_event_date}}?
+              Will you attend friday night {{info.date}}?
             </strong>
             <br/>
             <span style="text-decoration: underline; font-weight: bold">When</span>:

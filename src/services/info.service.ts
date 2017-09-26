@@ -3,15 +3,15 @@ import {Headers, Http} from '@angular/http';
 import {environment} from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
-import {Address} from './address.service';
 
-export class Info {
+export class EventInfo {
   public_id: string;
-  next_event_date: string;
-  next_event_start_time: string;
-  next_event_address: Address;
+  date: string;
+  starting_time: string;
+  ending_time: string;
   location: string;
   message: string;
+  is_past: boolean;
 }
 
 @Injectable()
@@ -23,19 +23,19 @@ export class InfoService {
   constructor(private http: Http) {
   }
 
-  getInfo(): Promise<Info> {
+  getInfo(): Promise<EventInfo> {
     return this.http.get(`${this.serviceURL}/next-event`)
       .toPromise()
-      .then(response => response.json() as Info)
+      .then(response => response.json() as EventInfo)
       .catch(this.handleError);
   }
 
-  updateInfo(info: Info): Promise<Info> {
+  updateInfo(info: EventInfo): Promise<EventInfo> {
     const url = `${this.serviceURL}/${info.public_id}`;
     return this.http
       .put(url, JSON.stringify(info), {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Info)
+      .then(response => response.json() as EventInfo)
       .catch(this.handleError);
   }
 

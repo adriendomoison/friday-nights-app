@@ -14,7 +14,7 @@
     <ion-list id="profile">
       <ion-item>
         <p style="font-size: large; font-weight: 400; font-style: italic; white-space: normal">
-          Next friday night: <span style="font-weight: bolder;">{{info.next_event_date || '...'}}</span>
+          Next friday night: <span style="font-weight: bolder;">{{info.date || '...'}}</span>
         </p>
       </ion-item>
       <ion-item color="none" id="avatar">
@@ -29,7 +29,9 @@
         <ion-label style="white-space: normal">
           Are you coming friday?
         </ion-label>
-        <ion-toggle (ngModelChange)="updateAttendance()" [(ngModel)]="user.next_event_attendance_status"></ion-toggle>
+        <ion-toggle (ngModelChange)="updateAttendance()"
+                    [(ngModel)]="user.next_event_attendance_status"
+                    [disabled]="info.is_past"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-card>

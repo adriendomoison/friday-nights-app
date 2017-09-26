@@ -5,7 +5,7 @@ import {SMS} from '@ionic-native/sms';
 import {AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
-import {Info, InfoService} from '../../services/info.service';
+import {EventInfo, InfoService} from '../../services/info.service';
 
 @Component({
   selector: 'page-updates',
@@ -16,7 +16,7 @@ export class UpdatesPage {
 
   private text: string;
   private wantToText: boolean = false;
-  private info: Info = new Info;
+  private info: EventInfo = new EventInfo;
   private isRegistered = true;
 
   constructor(public navCtrl: NavController,

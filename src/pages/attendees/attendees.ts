@@ -3,7 +3,7 @@ import {NavController, ToastController} from 'ionic-angular';
 import {Attendee, AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
-import {Info, InfoService} from '../../services/info.service';
+import {EventInfo, InfoService} from '../../services/info.service';
 
 @Component({
   selector: 'page-attendees',
@@ -14,7 +14,7 @@ export class AttendeesPage {
 
   attendees: Attendee[] = [];
   user: Attendee = new Attendee;
-  info: Info = new Info;
+  info: EventInfo = new EventInfo;
   attendees_is_loaded: boolean = false;
 
   constructor(public navCtrl: NavController,
