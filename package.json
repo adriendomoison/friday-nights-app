@@ -51,8 +51,7 @@
         "rxjs": "5.4.0",
         "sw-toolbox": "3.6.0",
         "web": "0.0.2",
-        "zone.js": "0.8.12",
-        "mx.ferreyra.callnumber": "~0.0.2"
+        "zone.js": "0.8.12"
     },
     "devDependencies": {
         "@angular/cli": "^1.4.2",
@@ -76,8 +75,7 @@
             "cordova-plugin-facebook4": {
                 "APP_ID": "1728222270815747",
                 "APP_NAME": "fridaynights"
-            },
-            "mx.ferreyra.callnumber": {}
+            }
         },
         "platforms": [
             "android",
