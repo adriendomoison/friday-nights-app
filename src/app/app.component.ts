@@ -48,17 +48,33 @@ export class MyApp {
     if (!this.platform.is('cordova')) {
       return;
     }
+
+    this.push.hasPermission()
+      .then((res: any) => {
+
+        if (res.isEnabled) {
+          console.log('We have permission to send push notifications');
+        } else {
+          console.log('We do not have permission to send push notifications');
+        }
+
+      });
+
     const options: PushOptions = {
       android: {
-        senderID: '916881271895'
+        senderID: '797816708457'
       },
       ios: {
         alert: 'true',
-        badge: false,
-        sound: 'true'
+        badge: true,
+        sound: 'false'
       },
-      windows: {}
+      windows: {},
+      browser: {
+        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+      }
     };
+
     const pushObject: PushObject = this.push.init(options);
 
     pushObject.on('registration').subscribe((data: any) => {

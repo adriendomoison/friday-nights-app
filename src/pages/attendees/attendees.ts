@@ -36,9 +36,7 @@ export class AttendeesPage {
 
   fetchEventInfo(): void {
     this.infoService.getInfo()
-      .then(info => {
-        this.info = info;
-      })
+      .then(info => this.info = info)
       .catch(() => {
       });
   }
