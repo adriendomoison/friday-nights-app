@@ -51,13 +51,11 @@ export class MyApp {
 
     this.push.hasPermission()
       .then((res: any) => {
-
         if (res.isEnabled) {
           console.log('We have permission to send push notifications');
         } else {
           console.log('We do not have permission to send push notifications');
         }
-
       });
 
     const options: PushOptions = {
