@@ -10,7 +10,7 @@ import {EventInfo, InfoService} from '../../services/info.service';
 @Component({
   selector: 'page-updates',
   templateUrl: 'updates.html',
-  providers: [AttendeeService, InfoService]
+  providers: [InfoService]
 })
 export class UpdatesPage {
 
@@ -18,6 +18,9 @@ export class UpdatesPage {
   private wantToText: boolean = false;
   private info: EventInfo = new EventInfo;
   private isRegistered = true;
+  lat: number = 33.1291222;
+  lng: number = -117.1619581;
+  geoService: any;
   map_style: any = [
     {
       'stylers': [
@@ -177,7 +180,7 @@ export class UpdatesPage {
       'elementType': 'labels',
       'stylers': [
         {
-          'visibility': 'off'
+          'visibility': 'on'
         }
       ]
     },
@@ -273,14 +276,6 @@ export class UpdatesPage {
     }
   ];
 
-  lat: number = 33.1291222;
-  lng: number = -117.1619581;
-
-  school_lat: number = 33.1291222;
-  school_lng: number = -117.1619581;
-
-  geoService: any;
-
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               public infoService: InfoService,
@@ -326,12 +321,8 @@ export class UpdatesPage {
   }
 
   private fetchProfile(): void {
-    this.attendeeService.getAttendee()
-      .then(user => {
-        this.isRegistered = user.next_event_attendance_status;
-      })
-      .catch(() => {
-      });
+    this.isRegistered = this.attendeeService.profileLatest.next_event_attendance_status;
+    this.attendeeService.profileObs$.subscribe(profile => this.isRegistered = profile.next_event_attendance_status);
   }
 
   callRuth(): void {

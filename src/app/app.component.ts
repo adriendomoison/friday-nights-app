@@ -10,8 +10,7 @@ import {Attendee, AttendeeService} from '../services/attendee.service';
 import {SettingsPage} from '../pages/settings/settings';
 
 @Component({
-  templateUrl: 'app.html',
-  providers: [AttendeeService]
+  templateUrl: 'app.html'
 })
 export class MyApp {
 
@@ -28,11 +27,10 @@ export class MyApp {
               private splashScreen: SplashScreen) {
     platform.ready().then(() => {
       statusBar.styleDefault();
+      this.attendeeService.profileObs$.subscribe(profile => this.user = profile);
       this.nativeStorage.getItem('user')
         .then(data => {
           this.accountService.connectFromRefreshToken(data.refresh_token).then(() => {
-            this.attendeeService.getAttendee()
-              .then(user => this.user = user);
             this.splashScreen.hide();
             this.nav.push(TabsControllerPage);
           }).catch(() => {

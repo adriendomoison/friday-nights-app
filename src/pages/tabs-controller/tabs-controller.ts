@@ -5,6 +5,7 @@ import {AttendeesPage} from '../attendees/attendees';
 import {RidesPage} from '../rides/rides';
 import {AccountService} from '../../services/account.service';
 import {LoginPage} from '../login/login';
+import {AttendeeService} from '../../services/attendee.service';
 
 @Component({
   selector: 'page-tabs-controller',
@@ -17,11 +18,13 @@ export class TabsControllerPage {
   tab3Root: any = AttendeesPage;
 
   constructor(public navCtrl: NavController,
+              private attendeeService: AttendeeService,
               private accountService: AccountService) {
   }
 
   ngOnInit() {
     if (!this.accountService.isConnected)
       this.navCtrl.setRoot(LoginPage);
+    this.attendeeService.loadUserProfile();
   }
 }

@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import {AccountService} from './account.service';
 
 import 'rxjs/add/operator/toPromise';
+import {Subject} from 'rxjs/Subject';
 
 export class Attendee {
   public_id: string;
@@ -19,6 +20,9 @@ export class AttendeeService {
 
   private serviceURL = environment.API_URL + '/api/v1/attendees';
   private headers = new Headers({'Content-Type': 'application/json'});
+  public profile = new Subject<Attendee>();
+  public profileLatest = new Attendee;
+  profileObs$ = this.profile.asObservable();
 
   constructor(private http: Http, private accountService: AccountService) {
   }
@@ -30,12 +34,12 @@ export class AttendeeService {
       .catch(this.handleError);
   }
 
-  getAttendee(): Promise<Attendee> {
+  loadUserProfile(): void {
     const url = `${this.serviceURL}/me`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
-    return this.http.get(url, {headers: this.headers})
+    this.http.get(url, {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Attendee)
+      .then(response => this.profile.next(this.profileLatest = response.json() as Attendee))
       .catch(this.handleError);
   }
 
@@ -45,7 +49,7 @@ export class AttendeeService {
     return this.http
       .post(url, {}, {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Attendee)
+      .then(response => this.profile.next(this.profileLatest = response.json() as Attendee))
       .catch(this.handleError);
   }
 
@@ -54,7 +58,10 @@ export class AttendeeService {
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
-      .then(() => null)
+      .then(() => {
+        this.profileLatest.next_event_attendance_status = false;
+        this.profile.next(this.profileLatest)
+      })
       .catch(this.handleError);
   }
 

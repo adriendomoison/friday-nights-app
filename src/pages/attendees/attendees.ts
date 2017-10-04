@@ -8,7 +8,7 @@ import {EventInfo, InfoService} from '../../services/info.service';
 @Component({
   selector: 'page-attendees',
   templateUrl: 'attendees.html',
-  providers: [AttendeeService, InfoService]
+  providers: [InfoService]
 })
 export class AttendeesPage {
 
@@ -42,12 +42,8 @@ export class AttendeesPage {
   }
 
   fetchProfile(): void {
-    this.attendeeService.getAttendee()
-      .then(user => {
-        this.user = user;
-      })
-      .catch(() => {
-      });
+    this.user = this.attendeeService.profileLatest;
+    this.attendeeService.profileObs$.subscribe(profile => this.user = profile);
   }
 
   fetchAttendeeList(): void {

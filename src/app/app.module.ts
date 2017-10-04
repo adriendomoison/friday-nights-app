@@ -27,6 +27,7 @@ import {Push} from '@ionic-native/push';
 import {AgmCoreModule} from '@agm/core';
 import {AutocompletePage} from '../pages/autocomplete/autocomplete';
 import {SuperTabsController, SuperTabsModule} from 'ionic2-super-tabs';
+import {AttendeeService} from '../services/attendee.service';
 import Autocomplete = google.maps.places.Autocomplete;
 
 @NgModule({
@@ -72,6 +73,7 @@ import Autocomplete = google.maps.places.Autocomplete;
   providers: [
     SuperTabsController,
     AccountService,
+    AttendeeService,
     StatusBar,
     SplashScreen,
     NativeStorage,

@@ -1,10 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {Attendee, AttendeeService} from '../../services/attendee.service';
+import {Attendee} from '../../services/attendee.service';
 
 @Component({
   selector: 'attendee',
-  templateUrl: 'attendee.html',
-  providers: [AttendeeService]
+  templateUrl: 'attendee.html'
 })
 export class AttendeeComponent {
 

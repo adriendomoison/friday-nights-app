@@ -14,17 +14,16 @@
 
   <ion-card *ngIf="!isRegistered && !info.is_past">
     <ion-list>
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [styles]="map_style" [streetViewControl]="false"
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14" [styles]="map_style" [streetViewControl]="false"
                [scrollwheel]="false" [zoomControl]="false" [disableDoubleClickZoom]="true">
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        <agm-marker [latitude]="school_lat" [longitude]="school_lng" iconUrl="assets/images/school_marker.png"></agm-marker>
       </agm-map>
       <ion-item>
         <h3 class="fn-card-title">
           Will you attend friday night {{info.date}} 🐣 ?
         </h3>
         <p class="fn-card-text">
-          <span style="text-decoration: underline; font-weight: bold">When</span>:
+          <span class="fn-info-name">When</span>:
           {{info.starting_time || '5:30pm'}}
         </p>
         <p class="fn-card-text">

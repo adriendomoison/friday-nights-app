@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, Platform, ToastController} from 'ionic-angular';
-import {AccountService, Credentials, FacebookCredentials, UserNotificationToken} from '../../services/account.service';
+import {AccountService, FacebookCredentials, UserNotificationToken} from '../../services/account.service';
 import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
 import {Facebook} from '@ionic-native/facebook';
@@ -13,7 +13,6 @@ import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 })
 export class LoginPage {
 
-  credentials: Credentials = new Credentials;
   loginProcess: boolean = false;
 
   constructor(public plt: Platform,
