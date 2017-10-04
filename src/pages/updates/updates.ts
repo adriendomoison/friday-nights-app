@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {CallNumber} from '@ionic-native/call-number';
 import {SMS} from '@ionic-native/sms';
@@ -18,14 +18,281 @@ export class UpdatesPage {
   private wantToText: boolean = false;
   private info: EventInfo = new EventInfo;
   private isRegistered = true;
+  map_style: any = [
+    {
+      'stylers': [
+        {
+          'color': '#607d8b'
+        }
+      ]
+    },
+    {
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#242f3e'
+        }
+      ]
+    },
+    {
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#746855'
+        }
+      ]
+    },
+    {
+      'elementType': 'labels.text.stroke',
+      'stylers': [
+        {
+          'color': '#242f3e'
+        }
+      ]
+    },
+    {
+      'featureType': 'administrative',
+      'stylers': [
+        {
+          'visibility': 'simplified'
+        }
+      ]
+    },
+    {
+      'featureType': 'administrative.locality',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#d59563'
+        }
+      ]
+    },
+    {
+      'featureType': 'landscape',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#607d8b'
+        }
+      ]
+    },
+    {
+      'featureType': 'landscape',
+      'elementType': 'labels',
+      'stylers': [
+        {
+          'visibility': 'off'
+        }
+      ]
+    },
+    {
+      'featureType': 'landscape.natural',
+      'stylers': [
+        {
+          'color': '#455a64'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi',
+      'stylers': [
+        {
+          'visibility': 'off'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi',
+      'elementType': 'labels',
+      'stylers': [
+        {
+          'visibility': 'off'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#d59563'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi.park',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#263c3f'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi.park',
+      'elementType': 'geometry.fill',
+      'stylers': [
+        {
+          'visibility': 'on'
+        }
+      ]
+    },
+    {
+      'featureType': 'poi.park',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#6b9a76'
+        }
+      ]
+    },
+    {
+      'featureType': 'road',
+      'stylers': [
+        {
+          'visibility': 'simplified'
+        }
+      ]
+    },
+    {
+      'featureType': 'road',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#38414e'
+        }
+      ]
+    },
+    {
+      'featureType': 'road',
+      'elementType': 'geometry.stroke',
+      'stylers': [
+        {
+          'color': '#212a37'
+        }
+      ]
+    },
+    {
+      'featureType': 'road',
+      'elementType': 'labels',
+      'stylers': [
+        {
+          'visibility': 'off'
+        }
+      ]
+    },
+    {
+      'featureType': 'road',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#9ca5b3'
+        }
+      ]
+    },
+    {
+      'featureType': 'road.highway',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#746855'
+        }
+      ]
+    },
+    {
+      'featureType': 'road.highway',
+      'elementType': 'geometry.stroke',
+      'stylers': [
+        {
+          'color': '#1f2835'
+        }
+      ]
+    },
+    {
+      'featureType': 'road.highway',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#f3d19c'
+        }
+      ]
+    },
+    {
+      'featureType': 'transit',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#2f3948'
+        }
+      ]
+    },
+    {
+      'featureType': 'transit',
+      'elementType': 'labels',
+      'stylers': [
+        {
+          'visibility': 'off'
+        }
+      ]
+    },
+    {
+      'featureType': 'transit.station',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#d59563'
+        }
+      ]
+    },
+    {
+      'featureType': 'water',
+      'elementType': 'geometry',
+      'stylers': [
+        {
+          'color': '#17263c'
+        }
+      ]
+    },
+    {
+      'featureType': 'water',
+      'elementType': 'labels.text.fill',
+      'stylers': [
+        {
+          'color': '#515c6d'
+        }
+      ]
+    },
+    {
+      'featureType': 'water',
+      'elementType': 'labels.text.stroke',
+      'stylers': [
+        {
+          'color': '#17263c'
+        }
+      ]
+    }
+  ];
+
+  lat: number = 33.1291222;
+  lng: number = -117.1619581;
+
+  school_lat: number = 33.1291222;
+  school_lng: number = -117.1619581;
+
+  geoService: any;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               public infoService: InfoService,
+              private ngZone: NgZone,
               private accountService: AccountService,
               private attendeeService: AttendeeService,
               private callNumber: CallNumber,
               private sms: SMS) {
+  }
+
+  ngOnInit(): void {
+    this.geoService = new google.maps.Geocoder();
   }
 
   ionViewDidEnter() {
@@ -37,16 +304,28 @@ export class UpdatesPage {
     }
   }
 
-  fetchEventInfo(): void {
+  private fetchEventInfo(): void {
     this.infoService.getInfo()
       .then(info => {
         this.info = info;
+        this.fetchEventLocation()
       })
       .catch(() => {
       });
   }
 
-  fetchProfile(): void {
+  private fetchEventLocation() {
+    this.geoService.geocode({
+      address: this.info.location
+    }, (results, status) => {
+      this.ngZone.run(() => {
+        this.lat = results[0].geometry.location.toJSON().lat;
+        this.lng = results[0].geometry.location.toJSON().lng;
+      });
+    });
+  }
+
+  private fetchProfile(): void {
     this.attendeeService.getAttendee()
       .then(user => {
         this.isRegistered = user.next_event_attendance_status;
@@ -68,7 +347,6 @@ export class UpdatesPage {
         let toast = this.toastCtrl.create({
           message: 'Text message sent!',
           duration: 3000,
-          position: 'top'
         });
         toast.present();
       })
@@ -76,14 +354,9 @@ export class UpdatesPage {
         let toast = this.toastCtrl.create({
           message: 'Your text was not delivered, please try with your message app: (760)-583-2381.',
           duration: 3000,
-          position: 'top'
         });
         toast.present();
       });
-  }
-
-  goToRides(): void {
-    this.navCtrl.parent.select(0);
   }
 
   setAttendanceToYes(): void {
@@ -99,7 +372,6 @@ export class UpdatesPage {
     let toast = this.toastCtrl.create({
       message: 'Thank you for letting us know! See you Friday!',
       duration: 3000,
-      position: 'top'
     });
     toast.present();
   }
@@ -108,7 +380,6 @@ export class UpdatesPage {
     let toast = this.toastCtrl.create({
       message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
       duration: 5000,
-      position: 'top'
     });
     toast.present();
   }

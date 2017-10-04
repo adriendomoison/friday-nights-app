@@ -3,11 +3,9 @@ import {NavController, Platform, ToastController} from 'ionic-angular';
 import {AccountService, Credentials, FacebookCredentials, UserNotificationToken} from '../../services/account.service';
 import {FacebookInitParams, FacebookService} from 'ng2-facebook-sdk';
 import {environment} from '../../environments/environment';
-import {HomePage} from '../home/home';
-import {SignUpPage} from '../sign-up/sign-up';
-import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 import {Facebook} from '@ionic-native/facebook';
 import {Push, PushObject, PushOptions} from '@ionic-native/push';
+import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 
 @Component({
   selector: 'page-login',
@@ -115,7 +113,6 @@ export class LoginPage {
     let toast = this.toastCtrl.create({
       message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
       duration: 5000,
-      position: 'top'
     });
     toast.present();
   }

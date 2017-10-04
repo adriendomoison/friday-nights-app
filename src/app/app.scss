@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,77 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+agm-map {
+  height: 150px;
+}
+
+.fn-secondary {
+  color: #455A64
+}
+
+.fn-no-content-text {
+  font-size: large !important;
+  font-weight: 100 !important;
+  text-align: center;
+  white-space: normal !important;
+  padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.fn-no-content-image {
+  width: 128px;
+  padding: 15px;
+  margin: auto;
+  display: block;
+}
+
+.fn-card-text {
+  padding-top: 10px;
+  color: #000000;
+  white-space: normal
+}
+
+.fn-card-title {
+  white-space: normal !important;
+  font-weight: bold !important;
+  font-size: medium !important;
+  color: #212121;
+}
+
+.fn-menu {
+  background-color: #455A64;
+  color: #ffffff;
+}
+
+.fn-menu-profile {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.fn-menu-profile-picture {
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 70px;
+}
+
+.fn-menu-profile-name {
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: 100;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fn-menu-elem-space {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  padding: 8px 0;
+}
+
+.fn-menu-elem {
+  padding-left: 5px;
+}

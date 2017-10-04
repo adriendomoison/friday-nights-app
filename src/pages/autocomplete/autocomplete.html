@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons navPop style="padding: 5px">
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title style="text-align: center">
+      <span style="font-weight: 100; font-size: 25px; font-family: Roboto, sans-serif">Where do you live?</span>
+    </ion-title>
+    <ion-searchbar style="margin-top: 20px;"
+                   [(ngModel)]="autocomplete.query"
+                   [showCancelButton]="true"
+                   (ionInput)="updateSearch()"
+                   (ionCancel)="dismiss()">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="autocompleteItems.length == 0" style="margin-top: 70px">
+    <p class="fn-no-content-text">
+      Type your address
+    </p>
+    <div style="width: 100%">
+      <img class="fn-no-content-image" src="assets/images/desert.png"/>
+    </div>
+  </div>
+
+  <ion-item *ngFor="let item of autocompleteItems" (tap)="chooseItem(item)" tappable>
+    <img style="width: 20px; margin-right: 20px; vertical-align: middle" src="assets/images/position.ico"/>
+    {{ item.description }}
+  </ion-item>
+</ion-content>

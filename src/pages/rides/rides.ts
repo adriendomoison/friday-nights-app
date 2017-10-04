@@ -1,7 +1,11 @@
 import {Component} from '@angular/core';
-import {NavController, ToastController} from 'ionic-angular';
+import {NativeStorage} from '@ionic-native/native-storage';
+import {ModalController, NavController, ToastController} from 'ionic-angular';
 import {Driver, DriverService, RideType} from '../../services/driver.service';
 import {RiderService} from '../../services/rider.service';
+import {AutocompletePage} from '../autocomplete/autocomplete';
+
+declare let google: any;
 
 @Component({
   selector: 'page-rides',
@@ -15,14 +19,32 @@ export class RidesPage {
   driversToGoHome: Driver[] = [];
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];
+  address: string;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
+              public modalCtrl: ModalController,
+              private nativeStorage: NativeStorage,
               private riderService: RiderService,
               private driverService: DriverService) {
   }
 
+  showModal() {
+    let modal = this.modalCtrl.create(AutocompletePage);
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.address = data.description;
+        this.nativeStorage.setItem('address', this.address);
+      }
+    });
+    modal.present();
+  }
+
   ionViewDidEnter() {
+    this.nativeStorage.getItem('address')
+      .then(address => this.address = address)
+      .catch(() => {
+      });
     this.driverService.getDrivers(RideType.GoToRuth)
       .then(drivers => this.driversToGoToRuth = drivers)
       .catch(() => {
@@ -34,37 +56,38 @@ export class RidesPage {
   }
 
   addDriver(rideType: RideType, number_of_seat: number): void {
-    this.canDrive[rideType] = true;
+    if (rideType == RideType.GoHome && !this.address) {
+      this.showModal();
+      return;
+    }
     let driver = new Driver;
     driver.number_of_seat_left = number_of_seat;
     driver.ride_type = rideType;
     this.driverService.createDriver(driver)
       .then(() => {
+        this.canDrive[rideType] = true;
         this.driverService.getDrivers(RideType.GoToRuth)
           .then(drivers => this.driversToGoToRuth = drivers)
           .catch(() => {
           });
       })
-      .catch(() => {
-        this.presentToastServerError();
-        this.canDrive[rideType] = false;
-      })
+      .catch(() => this.presentToastServerError());
   }
 
   addRider(rideType: RideType): void {
-    this.needARide[rideType] = true;
+    if (rideType == RideType.GoHome && !this.address) {
+      this.showModal();
+      return;
+    }
     this.riderService.createRideRequest()
-      .catch(() => {
-        this.presentToastServerError();
-        this.needARide[rideType] = false
-      })
+      .then(() => this.needARide[rideType] = true)
+      .catch(() => this.presentToastServerError())
   }
 
   presentToastServerError() {
     let toast = this.toastCtrl.create({
       message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
       duration: 5000,
-      position: 'top'
     });
     toast.present();
   }

@@ -1,20 +1,9 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Attendees
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding id="attendees">
   <ion-card id="user">
     <ion-list id="profile">
       <ion-item>
         <p style="font-size: large; font-weight: 400; font-style: italic; white-space: normal">
-          Next friday night: <span style="font-weight: bolder;">{{info.date || '...'}}</span>
+          Next friday night: <span style="font-weight: bolder;">{{info.date || 'TBA'}}</span>
         </p>
       </ion-item>
       <ion-item color="none" id="avatar">
@@ -29,7 +18,8 @@
         <ion-label style="white-space: normal">
           Are you coming friday?
         </ion-label>
-        <ion-toggle (ngModelChange)="updateAttendance()"
+        <ion-toggle color="secondary"
+                    (ngModelChange)="updateAttendance()"
                     [(ngModel)]="user.next_event_attendance_status"
                     [disabled]="info.is_past"></ion-toggle>
       </ion-item>
@@ -39,13 +29,9 @@
   <ion-card id="attendee-list-card">
     <ion-list>
       <ion-item id="attendee-list-title">
-        <div id="attendee-list-title-conainter" class="show-list-numbers-and-dots">
-          <p style="margin-top:0; color:#000000; white-space: normal">
-            See who is coming this friday!
-          </p>
-        </div>
+        <h3 class="fn-card-title" *ngIf="!info.is_past">See who is coming this friday night!</h3>
+        <h3 class="fn-card-title" *ngIf="info.is_past">See who came last friday night!</h3>
       </ion-item>
-
 
       <div *ngIf="attendees_is_loaded; else not_loaded">
         <div *ngIf="attendees && attendees.length > 0; else no_content">
@@ -53,9 +39,9 @@
         </div>
         <ng-template #no_content>
           <ion-item>
-            <p style="font-size: large; font-weight: 100; text-align: center; white-space: normal">
-              Be the first to let us know you are coming! We love you!
-              <img style="width: 128px; padding: 15px; margin: auto" src="assets/images/nobody_registered.png"/>
+            <p class="fn-no-content-text">
+              Hi there 😎 ! Looks like you'll be the first to let us know you are coming!
+              <img class="fn-no-content-image" src="assets/images/nobody_registered.png"/>
             </p>
           </ion-item>
         </ng-template>

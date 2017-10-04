@@ -41,34 +41,8 @@
     <button ion-button outline (click)="updateBasicInfo()">Update</button>
   </div>
   <hr>
-  <div>
-    <h5>Password</h5>
-    <div *ngIf="wrong_field">
-      <p class="error-message">Some fields are not satisfied with what you gave...</p>
-    </div>
-
-    <ion-item>
-      <ion-input type="password" name="old_password" placeholder="Current password"
-                 [(ngModel)]="userChangePassword.password" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="password" name="new_password" placeholder="New password"
-                 [(ngModel)]="userChangePassword.new_password" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="password" name="password_re" placeholder="Retype new password"
-                 [(ngModel)]="userChangePassword.password_re" required></ion-input>
-    </ion-item>
-
-    <br>
-
-    <button ion-button outline (click)="updatePassword()">Update</button>
-  </div>
-  <hr>
-  <div>
+  <div style="margin-top: 20px">
     <h5>Delete your account</h5>
-    <button ion-button outline color="danger" (click)="deleteUser()">Delete Account</button>
+    <button ion-button color="danger" (click)="deleteUser()">Delete Account</button>
   </div>
 </ion-content>

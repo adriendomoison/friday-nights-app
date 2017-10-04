@@ -1,15 +1,25 @@
 <ion-menu [content]="content">
-  <ion-content>
-    <ion-list>
-      <button ion-item menuClose (click)="openSettings()">
-        <ion-icon name="options" item-left></ion-icon>
-        Settings
-      </button>
-      <button ion-item menuClose (click)="logout()">
-        <ion-icon name="exit" item-left></ion-icon>
-        Logout
-      </button>
-    </ion-list>
+  <ion-content class="fn-menu">
+    <ion-item color="none" id="avatar" class="fn-menu fn-menu-profile" no-lines>
+      <img class="fn-menu-profile-picture" [src]="user.profile_picture_url || 'assets/images/user.png'"/>
+      <h2 style="display: inline-block">
+        <span class="fn-menu-profile-name">{{user.first_name || 'You'}} {{user.last_name}}</span>
+      </h2>
+    </ion-item>
+    <button no-lines ion-item menuClose (click)="openSettings()" class="fn-menu">
+      <!--<ion-icon name="options" item-left></ion-icon>-->
+      <div class="fn-menu-elem-space" item-left>
+        <i class="fal fa-cog fn-menu-icon" data-fa-transform="grow-8" aria-hidden="true"></i>
+      </div>
+      <span class="fn-menu-elem">Settings</span>
+    </button>
+    <button no-lines ion-item menuClose (click)="logout()" class="fn-menu">
+      <!--<ion-icon name="exit" item-left></ion-icon>-->
+      <div class="fn-menu-elem-space" item-left>
+        <i class="fal fa-sign-out fn-menu-icon" data-fa-transform="grow-8" aria-hidden="true"></i>
+      </div>
+      <span class="fn-menu-elem">Logout</span>
+    </button>
   </ion-content>
 </ion-menu>
 

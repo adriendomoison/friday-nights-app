@@ -24,6 +24,10 @@ import {FacebookService} from 'ng2-facebook-sdk';
 import {SMS} from '@ionic-native/sms';
 import {CallNumber} from '@ionic-native/call-number';
 import {Push} from '@ionic-native/push';
+import {AgmCoreModule} from '@agm/core';
+import {AutocompletePage} from '../pages/autocomplete/autocomplete';
+import {SuperTabsController, SuperTabsModule} from 'ionic2-super-tabs';
+import Autocomplete = google.maps.places.Autocomplete;
 
 @NgModule({
   declarations: [
@@ -39,10 +43,16 @@ import {Push} from '@ionic-native/push';
     AttendeesPage,
     DriverComponent,
     AttendeeComponent,
+    AutocompletePage,
   ],
   imports: [
     HttpModule,
     BrowserModule,
+    SuperTabsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCaFEVccoGDqwT7b34jS-QtAQzbD2RikHc',
+      libraries: ['places']
+    }),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -57,8 +67,10 @@ import {Push} from '@ionic-native/push';
     UpdatesPage,
     RidesPage,
     AttendeesPage,
+    AutocompletePage
   ],
   providers: [
+    SuperTabsController,
     AccountService,
     StatusBar,
     SplashScreen,

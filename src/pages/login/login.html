@@ -1,12 +1,13 @@
-<ion-content padding no-bounce>
-  <div>
-    <h1 style="font-weight: 100">Friday Nights</h1>
-    <p>Please login using your facebook account</p>
-    <br>
+<ion-content padding no-bounce class="fn-login-background">
+  <div class="fn-login-headline">
+    <h1>Friday <span class="fn-highlight">Nights</span></h1>
+  </div>
+  <div class="fn-login-content">
     <button ion-button full class="fb-btn" [disabled]="loginProcess" (click)="facebookLogin()">
-      <i class="fab fa-facebook-f" data-fa-transform="grow-8" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login with facebook
-      <span *ngIf="loginProcess">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-spinner name="crescent"></ion-spinner></span>
+      <i class="fab fa-facebook-f" data-fa-transform="grow-8" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login
+      with facebook
+      <span *ngIf="loginProcess">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ion-spinner
+        name="crescent"></ion-spinner></span>
     </button>
   </div>
-
 </ion-content>

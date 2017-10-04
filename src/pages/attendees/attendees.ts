@@ -81,7 +81,6 @@ export class AttendeesPage {
     let toast = this.toastCtrl.create({
       message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
       duration: 5000,
-      position: 'top'
     });
     toast.present();
   }
@@ -90,7 +89,6 @@ export class AttendeesPage {
     let toast = this.toastCtrl.create({
       message: 'You are registered. See you Friday!',
       duration: 3000,
-      position: 'top'
     });
     toast.present();
   }
@@ -99,7 +97,6 @@ export class AttendeesPage {
     let toast = this.toastCtrl.create({
       message: 'You have been successfully deregistered.',
       duration: 3000,
-      position: 'top'
     });
     toast.present();
   }

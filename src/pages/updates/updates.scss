@@ -1,6 +1,14 @@
 page-updates {
-  .center-cropped {
-    height: 150px;
-    background: #e57373 url('../assets/images/calendar.png') no-repeat center center;
+  //a[href^="https://maps.google.com/maps"]{display:none !important}
+
+  a[href^="http://maps.google.com/maps"] {
+    display: none !important
+  }
+
+  .gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display: none;
+  }
+  .gmnoprint div {
+    background: none !important;
   }
 }
