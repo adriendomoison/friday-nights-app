@@ -305,8 +305,7 @@ export class UpdatesPage {
         this.info = info;
         this.fetchEventLocation()
       })
-      .catch(() => {
-      });
+      .catch(() => this.info.is_past = true);
   }
 
   private fetchEventLocation() {

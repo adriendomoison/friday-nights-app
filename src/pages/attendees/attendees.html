@@ -26,7 +26,7 @@
     </ion-list>
   </ion-card>
 
-  <ion-card id="attendee-list-card">
+  <ion-card *ngIf="attendees && attendees.length == 0 && info.is_past" id="attendee-list-card">
     <ion-list>
       <ion-item id="attendee-list-title">
         <h3 class="fn-card-title" *ngIf="!info.is_past">See who is coming this friday night!</h3>
