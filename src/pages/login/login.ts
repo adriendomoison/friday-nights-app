@@ -25,10 +25,6 @@ export class LoginPage {
               private fb: FacebookService) {
   }
 
-  ionViewDidEnter() {
-    this.initPushNotification();
-  }
-
   initPushNotification() {
     if (!this.platform.is('cordova')) {
       return;
@@ -101,7 +97,10 @@ export class LoginPage {
 
   login(response): void {
     this.accountService.facebookSignIn(new FacebookCredentials(response.authResponse.userID, response.authResponse.accessToken))
-      .then(() => this.navCtrl.setRoot(TabsControllerPage))
+      .then(() => {
+        this.initPushNotification();
+        this.navCtrl.setRoot(TabsControllerPage)
+      })
       .catch(() => {
         this.presentToastServerError();
         this.loginProcess = false
