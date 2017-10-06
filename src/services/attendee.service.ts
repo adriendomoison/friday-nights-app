@@ -13,6 +13,7 @@ export class Attendee {
   home_country: string;
   profile_picture_url: string;
   next_event_attendance_status: boolean;
+  attendance_count: number;
 }
 
 @Injectable()
