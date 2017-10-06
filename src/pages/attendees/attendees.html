@@ -2,8 +2,8 @@
   <ion-card id="user">
     <ion-list id="profile">
       <ion-item>
-        <p style="font-size: large; font-weight: 400; font-style: italic; white-space: normal">
-          Next friday night: <span style="font-weight: bolder;">{{info.date || 'TBA'}}</span>
+        <p class="fn-next-event-announcement">
+          Next friday night: <span class="fn-next-event-date">{{info.date || 'TBA'}}</span>
         </p>
       </ion-item>
       <ion-item color="none" id="avatar">
@@ -15,7 +15,7 @@
         </h2>
       </ion-item>
       <ion-item id="attendance">
-        <ion-label style="white-space: normal">
+        <ion-label class="fn-back-to-line">
           Are you coming friday?
         </ion-label>
         <ion-toggle color="secondary"
@@ -48,8 +48,8 @@
       </div>
 
       <ng-template #not_loaded>
-        <div style="margin: auto; padding-top: 50px; padding-bottom: 120px; width: 50px">
-          <ion-spinner style="display: block; margin: auto" name="crescent"></ion-spinner>
+        <div class="fn-loading-spinner-box">
+          <ion-spinner clear="fn-loading-spinner" name="crescent"></ion-spinner>
         </div>
       </ng-template>
 
