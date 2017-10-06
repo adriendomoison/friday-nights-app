@@ -3,7 +3,7 @@
     <name>Friday Night</name>
     <description>Official app for Friday Nights International gatherings at Ruth and Milt's house!</description>
     <author email="adomoison@gmail.com" href="https://www.linkedin.com/in/adrien-domoison/">Adrien Domoison</author>
-    <content original-src="index.html" src="http://192.168.1.86:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
