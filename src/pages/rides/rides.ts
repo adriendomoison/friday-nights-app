@@ -3,7 +3,8 @@ import {NativeStorage} from '@ionic-native/native-storage';
 import {ModalController, NavController, ToastController} from 'ionic-angular';
 import {Driver, DriverService, RideType} from '../../services/driver.service';
 import {RiderService} from '../../services/rider.service';
-import {AutocompletePage} from '../autocomplete/autocomplete';
+import {AddressPage} from '../address/address';
+import {SeatsPage} from '../seats/seats';
 
 declare let google: any;
 
@@ -20,6 +21,7 @@ export class RidesPage {
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];
   address: string;
+  seats: number;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
@@ -27,17 +29,6 @@ export class RidesPage {
               private nativeStorage: NativeStorage,
               private riderService: RiderService,
               private driverService: DriverService) {
-  }
-
-  showModal() {
-    let modal = this.modalCtrl.create(AutocompletePage);
-    modal.onDidDismiss(data => {
-      if (data) {
-        this.address = data.description;
-        this.nativeStorage.setItem('address', this.address);
-      }
-    });
-    modal.present();
   }
 
   ionViewDidEnter() {
@@ -55,16 +46,40 @@ export class RidesPage {
       });
   }
 
-  addDriver(rideType: RideType, number_of_seat: number): void {
-    if (rideType == RideType.GoHome && !this.address) {
-      this.showModal();
-      return;
-    }
+  showModalAddAddress(rideType: RideType) {
+    let modal = this.modalCtrl.create(AddressPage);
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.address = data.description;
+        this.nativeStorage.setItem('address', this.address);
+        this.addRider(rideType)
+      }
+    });
+    modal.present();
+  }
+
+  showModalSeats(rideType: RideType) {
+    let modal = this.modalCtrl.create(SeatsPage);
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.seats = data.seats;
+        this.addDriver(rideType);
+      }
+    });
+    modal.present();
+  }
+
+  addDriver(rideType: RideType): void {
+    if (rideType == RideType.GoHome && !this.address)
+      return this.showModalAddAddress(RideType.GoHome);
+    if (!this.seats)
+      return this.showModalSeats(RideType.GoHome);
     let driver = new Driver;
-    driver.number_of_seat_left = number_of_seat;
+    driver.number_of_seat_left = this.seats;
     driver.ride_type = rideType;
     this.driverService.createDriver(driver)
       .then(() => {
+        this.presentToastDriverAdded();
         this.canDrive[rideType] = true;
         this.driverService.getDrivers(RideType.GoToRuth)
           .then(drivers => this.driversToGoToRuth = drivers)
@@ -75,19 +90,36 @@ export class RidesPage {
   }
 
   addRider(rideType: RideType): void {
-    if (rideType == RideType.GoHome && !this.address) {
-      this.showModal();
-      return;
-    }
+    if (rideType == RideType.GoHome && !this.address)
+      return this.showModalAddAddress(RideType.GoHome);
     this.riderService.createRideRequest()
-      .then(() => this.needARide[rideType] = true)
+      .then(() => {
+        this.presentToastRiderAdded();
+        this.needARide[rideType] = true;
+      })
       .catch(() => this.presentToastServerError())
   }
 
   presentToastServerError() {
     let toast = this.toastCtrl.create({
-      message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
-      duration: 5000,
+      message: 'Oh no! Something bad happened. Please come back later when we fixed that problem. Thanks.',
+      duration: 4000,
+    });
+    toast.present();
+  }
+
+  presentToastDriverAdded() {
+    let toast = this.toastCtrl.create({
+      message: '💌 Thank you so much for driving students, you are amazing.',
+      duration: 3000,
+    });
+    toast.present();
+  }
+
+  presentToastRiderAdded() {
+    let toast = this.toastCtrl.create({
+      message: 'Ride request saved. We\'ll find you a safe drive home!',
+      duration: 3000,
     });
     toast.present();
   }

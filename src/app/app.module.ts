@@ -25,9 +25,10 @@ import {SMS} from '@ionic-native/sms';
 import {CallNumber} from '@ionic-native/call-number';
 import {Push} from '@ionic-native/push';
 import {AgmCoreModule} from '@agm/core';
-import {AutocompletePage} from '../pages/autocomplete/autocomplete';
+import {AddressPage} from '../pages/address/address';
 import {SuperTabsController, SuperTabsModule} from 'ionic2-super-tabs';
 import {AttendeeService} from '../services/attendee.service';
+import {SeatsPage} from '../pages/seats/seats';
 import Autocomplete = google.maps.places.Autocomplete;
 
 @NgModule({
@@ -44,7 +45,8 @@ import Autocomplete = google.maps.places.Autocomplete;
     AttendeesPage,
     DriverComponent,
     AttendeeComponent,
-    AutocompletePage,
+    AddressPage,
+    SeatsPage,
   ],
   imports: [
     HttpModule,
@@ -68,7 +70,8 @@ import Autocomplete = google.maps.places.Autocomplete;
     UpdatesPage,
     RidesPage,
     AttendeesPage,
-    AutocompletePage
+    AddressPage,
+    SeatsPage,
   ],
   providers: [
     SuperTabsController,

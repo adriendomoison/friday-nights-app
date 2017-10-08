@@ -74,8 +74,8 @@ export class AttendeesPage {
   attendanceStatusUpdateError() {
     this.user.next_event_attendance_status = !this.user.next_event_attendance_status;
     let toast = this.toastCtrl.create({
-      message: 'Problem with internet connection. Please make sure that your device is not switched to airplane mode.',
-      duration: 5000,
+      message: 'Oh no! Something bad happened. Please come back later when we fixed that problem. Thanks.',
+      duration: 4000,
     });
     toast.present();
   }

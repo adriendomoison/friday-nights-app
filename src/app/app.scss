@@ -118,3 +118,37 @@ agm-map {
 .fn-menu-elem {
   padding-left: 5px;
 }
+
+.fn-modal-title {
+  font-weight: 100;
+  font-size: 25px;
+  font-family: Roboto, sans-serif;
+  white-space: normal;
+}
+
+.fn-modal-header {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+}
+
+.fn-modal-content {
+  width: 96%;
+  height: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.fn-div-content-center {
+  padding: 15px;
+  margin: auto;
+  text-align: center;
+}

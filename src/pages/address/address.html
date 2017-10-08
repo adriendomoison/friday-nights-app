@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="fn-modal-header">
   <ion-toolbar>
 
     <ion-buttons navPop style="padding: 5px">
@@ -8,10 +8,10 @@
     </ion-buttons>
 
     <ion-title style="text-align: center">
-      <span style="font-weight: 100; font-size: 25px; font-family: Roboto, sans-serif">Where do you live?</span>
+      <span class="fn-modal-title">Where do you live?</span>
     </ion-title>
     <ion-searchbar style="margin-top: 20px;"
-                   [(ngModel)]="autocomplete.query"
+                   [(ngModel)]="address.query"
                    [showCancelButton]="true"
                    (ionInput)="updateSearch()"
                    (ionCancel)="dismiss()">
@@ -19,8 +19,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf="autocompleteItems.length == 0" style="margin-top: 70px">
+<ion-content class="fn-modal-content">
+  <div *ngIf="addressItems.length == 0" style="margin-top: 70px">
     <p class="fn-no-content-text">
       Type your address
     </p>
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <ion-item *ngFor="let item of autocompleteItems" (tap)="chooseItem(item)" tappable>
+  <ion-item *ngFor="let item of addressItems" (tap)="chooseItem(item)" tappable>
     <img style="width: 20px; margin-right: 20px; vertical-align: middle" src="assets/images/position.ico"/>
     {{ item.description }}
   </ion-item>

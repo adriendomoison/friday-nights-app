@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {ViewController} from 'ionic-angular';
 
 @Component({
-  selector: 'page-autocomplete',
-  templateUrl: 'autocomplete.html',
+  selector: 'page-address',
+  templateUrl: 'address.html',
 })
-export class AutocompletePage implements OnInit {
+export class AddressPage implements OnInit {
 
-  autocompleteItems: any;
-  autocomplete: any;
+  addressItems: any;
+  address: any;
   acService: any;
 
   constructor(public viewCtrl: ViewController) {
@@ -16,8 +16,8 @@ export class AutocompletePage implements OnInit {
 
   ngOnInit() {
     this.acService = new google.maps.places.AutocompleteService();
-    this.autocompleteItems = [];
-    this.autocomplete = {
+    this.addressItems = [];
+    this.address = {
       query: ''
     };
   }
@@ -31,20 +31,20 @@ export class AutocompletePage implements OnInit {
   }
 
   updateSearch() {
-    if (this.autocomplete.query == '') {
-      this.autocompleteItems = [];
+    if (this.address.query == '') {
+      this.addressItems = [];
       return;
     }
     let self = this;
     let config = {
       types: ['geocode'],
-      input: this.autocomplete.query,
+      input: this.address.query,
       componentRestrictions: {country: 'US'}
     };
     this.acService.getPlacePredictions(config, function (predictions, status) {
-      self.autocompleteItems = [];
+      self.addressItems = [];
       predictions.forEach(function (prediction) {
-        self.autocompleteItems.push(prediction);
+        self.addressItems.push(prediction);
       });
     });
   }
