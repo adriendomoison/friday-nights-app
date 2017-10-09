@@ -5,18 +5,18 @@ import {SMS} from '@ionic-native/sms';
 import {AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
-import {EventInfo, InfoService} from '../../services/info.service';
+import {Event, EventService} from '../../services/event.service';
 
 @Component({
   selector: 'page-updates',
   templateUrl: 'updates.html',
-  providers: [InfoService]
+  providers: [EventService]
 })
 export class UpdatesPage {
 
   private text: string;
   private wantToText: boolean = false;
-  private info: EventInfo = new EventInfo;
+  private info: Event = new Event;
   private isRegistered = true;
   lat: number = 33.1291222;
   lng: number = -117.1619581;
@@ -278,7 +278,7 @@ export class UpdatesPage {
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
-              public infoService: InfoService,
+              public eventService: EventService,
               private ngZone: NgZone,
               private accountService: AccountService,
               private attendeeService: AttendeeService,
@@ -300,7 +300,7 @@ export class UpdatesPage {
   }
 
   private fetchEventInfo(): void {
-    this.infoService.getInfo()
+    this.eventService.getEvent()
       .then(info => {
         this.info = info;
         this.fetchEventLocation()

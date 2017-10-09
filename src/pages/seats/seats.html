@@ -17,17 +17,14 @@
 
 <ion-content class="fn-modal-content">
   <div class="fn-div-content-center">
-    <button ion-button (click)="setSeats(1)">1 seat</button>
-    <button ion-button (click)="setSeats(2)">2 seats</button>
-    <button ion-button (click)="setSeats(3)">3 seats</button>
-    <button ion-button (click)="setSeats(4)">4 seats</button>
-    <button ion-button (click)="setSeats(5)">5 seats</button>
-    <button ion-button (click)="setSeats(6)">6 seats</button>
-    <button ion-button (click)="setSeats(7)">7 seats</button>
+    <button ion-button clear (click)="setSeats(2)">2 seats</button>
+    <button ion-button clear (click)="setSeats(3)">3 seats</button>
+    <button ion-button clear (click)="setSeats(4)">4 seats</button>
+    <button ion-button clear (click)="setSeats(6)">6 seats</button>
   </div>
   <ion-item class="fn-item-input">
-    <ion-label fixed>other</ion-label>
-    <ion-input type="text" name="seats" [(ngModel)]="seats"></ion-input>
+    <ion-label>other</ion-label>
+    <ion-input type="number" name="seats" [(ngModel)]="seats" min="0"></ion-input>
   </ion-item>
-  <button ion-button (click)="setSeats(seats)" class="fn-align-right">Add {{seats}} seats</button>
+  <button ion-button clear (click)="setSeats(seats)">Add {{seats}} seats</button>
 </ion-content>

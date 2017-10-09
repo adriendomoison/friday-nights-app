@@ -3,23 +3,23 @@ import {NavController, ToastController} from 'ionic-angular';
 import {Attendee, AttendeeService} from '../../services/attendee.service';
 import {LoginPage} from '../login/login';
 import {AccountService} from '../../services/account.service';
-import {EventInfo, InfoService} from '../../services/info.service';
+import {Event, EventService} from '../../services/event.service';
 
 @Component({
   selector: 'page-attendees',
   templateUrl: 'attendees.html',
-  providers: [InfoService]
+  providers: [EventService]
 })
 export class AttendeesPage {
 
   attendees: Attendee[] = [];
   user: Attendee = new Attendee;
-  info: EventInfo = new EventInfo;
+  info: Event = new Event;
   attendees_is_loaded: boolean = false;
 
   constructor(public navCtrl: NavController,
               public accountService: AccountService,
-              public infoService: InfoService,
+              public infoService: EventService,
               public toastCtrl: ToastController,
               private attendeeService: AttendeeService) {
   }
@@ -35,7 +35,7 @@ export class AttendeesPage {
   }
 
   fetchEventInfo(): void {
-    this.infoService.getInfo()
+    this.infoService.getEvent()
       .then(info => this.info = info)
       .catch(() => this.info.is_past = true);
   }

@@ -19,7 +19,7 @@ export class Attendee {
 @Injectable()
 export class AttendeeService {
 
-  private serviceURL = environment.API_URL + '/api/v1/attendees';
+  private serviceURL = environment.API_URL + '/api/v1/attendee';
   private headers = new Headers({'Content-Type': 'application/json'});
   public profile = new Subject<Attendee>();
   public profileLatest = new Attendee;
@@ -29,14 +29,15 @@ export class AttendeeService {
   }
 
   getAttendees(): Promise<Attendee[]> {
-    return this.http.get(this.serviceURL)
+    const url = `${this.serviceURL}s`;
+    return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Attendee[])
       .catch(this.handleError);
   }
 
   loadUserProfile(): void {
-    const url = `${this.serviceURL}/me`;
+    const url = `${this.serviceURL}`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     this.http.get(url, {headers: this.headers})
       .toPromise()
@@ -45,7 +46,7 @@ export class AttendeeService {
   }
 
   setAttendance(): Promise<void> {
-    const url = `${this.serviceURL}/me`;
+    const url = `${this.serviceURL}s`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
       .post(url, {}, {headers: this.headers})
@@ -55,7 +56,7 @@ export class AttendeeService {
   }
 
   deleteAttendance(): Promise<void> {
-    const url = `${this.serviceURL}/me`;
+    const url = `${this.serviceURL}`;
     this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
