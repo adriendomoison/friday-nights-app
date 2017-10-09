@@ -25,9 +25,10 @@ export class RiderService {
   constructor(private http: Http, private accountService: AccountService) {
   }
 
-  getRiders(): Promise<Rider[]> {
+  getRiders(rideType: RideType): Promise<Rider[]> {
     const url = `${this.serviceURL}s`;
-    return this.http.get(url)
+    let params = new HttpParams().set('ridetype', Utils.rideTypeToString(rideType));
+    return this.http.get(url, {params: params.toString(), headers: this.headers})
       .toPromise()
       .then(response => response.json() as Rider[])
       .catch(this.handleError);

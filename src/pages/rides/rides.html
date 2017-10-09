@@ -18,8 +18,8 @@
           </h3>
         </ion-item>
 
-        <div *ngIf="driversToGoToRuth > 0;else no_content_for_drivers_to_go_to_ruth">
-          <driver *ngFor="let driver of driversToGoToRuth" [driver]="driver"></driver>
+        <div *ngIf="drivers[RideType.GO_TO_RUTH] != [];else no_content_for_drivers_to_go_to_ruth">
+          <driver *ngFor="let driver of drivers[RideType.GO_TO_RUTH]" [driver]="driver"></driver>
         </div>
 
         <ng-template #no_content_for_drivers_to_go_to_ruth>
@@ -77,8 +77,8 @@
           </h3>
         </ion-item>
 
-        <div *ngIf="driversToGoHome > 0;else no_content_for_drivers_to_go_home">
-          <driver *ngFor="let driver of driversToGoHome" [driver]="driver"></driver>
+        <div *ngIf="drivers[RideType.GO_HOME] != [];else no_content_for_drivers_to_go_home">
+          <driver *ngFor="let driver of drivers[RideType.GO_HOME]" [driver]="driver"></driver>
         </div>
 
         <ng-template #no_content_for_drivers_to_go_home>
