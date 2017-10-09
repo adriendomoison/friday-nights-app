@@ -3,49 +3,49 @@ import {Headers, Http} from '@angular/http';
 import {environment} from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
-
-export enum RideType {
-  GoToRuth = 0,
-  GoHome
-}
+import {RideType, Utils} from './utils.service';
+import {AccountService} from './account.service';
+import {HttpParams} from '@angular/common/http';
 
 export class Driver {
   public_id: string;
   first_name: string;
   last_name: string;
   profile_picture_url: string;
-  number_of_seat_left: number;
-  ride_type: RideType
+  number_of_seats: number;
+  ride_type: string;
+  status: string;
+  address: string;
 }
 
 @Injectable()
 export class DriverService {
 
-  private serviceURL = environment.API_URL + '/api/v1/drivers';
+  private serviceURL = environment.API_URL + '/api/v1/driver';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private accountService: AccountService) {
   }
 
-  getDrivers(ride: RideType): Promise<Driver[]> {
+  getDrivers(rideType: RideType): Promise<Driver[]> {
 
     let params: URLSearchParams = new URLSearchParams();
-    params.set('ride', ride.toString());
+    params.set('ridetype', Utils.rideTypeToString(rideType));
 
-    return this.http.get(this.serviceURL, {search: params, headers: this.headers})
+    const url = `${this.serviceURL}s`;
+    return this.http.get(url, {search: params, headers: this.headers})
       .toPromise()
       .then(response => response.json() as Driver[])
       .catch(this.handleError);
   }
 
-  getDriver(public_id: string): Promise<Driver> {
-    const url = `${this.serviceURL}/${public_id}`;
+  getDriver(): Promise<Driver> {
+    const url = `${this.serviceURL}`;
     return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Driver)
       .catch(this.handleError);
   }
-
 
   updateDriver(driver: Driver): Promise<Driver> {
     const url = `${this.serviceURL}/${driver.public_id}`;
@@ -57,16 +57,20 @@ export class DriverService {
   }
 
   createDriver(driver: Driver): Promise<Driver> {
+    const url = `${this.serviceURL}s`;
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
-      .post(this.serviceURL, JSON.stringify(driver), {headers: this.headers})
+      .post(url, JSON.stringify(driver), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
-  deleteDriver(): Promise<void> {
-    const url = `${this.serviceURL}/me`;
-    return this.http.delete(url, {headers: this.headers})
+  deleteDriver(rideType: RideType): Promise<void> {
+    const url = `${this.serviceURL}`;
+    let params = new HttpParams().set('ridetype', Utils.rideTypeToString(rideType));
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
+    return this.http.delete(url, {params: params.toString(), headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

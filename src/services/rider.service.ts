@@ -1,38 +1,40 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {environment} from '../environments/environment';
-import {Address} from './address.service';
-import {Driver} from './driver.service';
-
+import {RideType, Utils} from './utils.service';
+import {AccountService} from './account.service';
 import 'rxjs/add/operator/toPromise';
+import {HttpParams} from '@angular/common/http';
 
 export class Rider {
   public_id: string;
+  ride_type: string;
   first_name: string;
   last_name: string;
   profile_picture_url: string;
-  address: Address;
-  driver: Driver;
+  address: string;
+  driver_public_id: string;
 }
 
 @Injectable()
 export class RiderService {
 
-  private serviceURL = environment.API_URL + '/api/v1/riders';
+  private serviceURL = environment.API_URL + '/api/v1/rider';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private accountService: AccountService) {
   }
 
   getRiders(): Promise<Rider[]> {
-    return this.http.get(this.serviceURL)
+    const url = `${this.serviceURL}s`;
+    return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Rider[])
       .catch(this.handleError);
   }
 
-  getRider(public_id: string): Promise<Rider> {
-    const url = `${this.serviceURL}/${public_id}`;
+  getRider(): Promise<Rider> {
+    const url = `${this.serviceURL}`;
     return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Rider)
@@ -40,7 +42,7 @@ export class RiderService {
   }
 
   updateRider(rider: Rider): Promise<Rider> {
-    const url = `${this.serviceURL}/${rider.public_id}`;
+    const url = `${this.serviceURL}`;
     return this.http
       .put(url, JSON.stringify(rider), {headers: this.headers})
       .toPromise()
@@ -48,25 +50,21 @@ export class RiderService {
       .catch(this.handleError);
   }
 
-  createRideRequest(): Promise<Rider> {
-    return this.http
-      .post(this.serviceURL, {}, {headers: this.headers})
-      .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
-  }
-
   addRider(rider: Rider): Promise<Rider> {
+    const url = `${this.serviceURL}s`;
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
     return this.http
-      .post(this.serviceURL, JSON.stringify(rider), {headers: this.headers})
+      .post(url, JSON.stringify(rider), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
-  deleteRider(public_id: string): Promise<void> {
-    const url = `${this.serviceURL}/${public_id}`;
-    return this.http.delete(url, {headers: this.headers})
+  deleteRider(rideType: RideType): Promise<void> {
+    const url = `${this.serviceURL}`;
+    let params = new HttpParams().set('ridetype', Utils.rideTypeToString(rideType));
+    this.headers.set('Authorization', 'Bearer ' + this.accountService.getAuth().access_token);
+    return this.http.delete(url, {params: params.toString(), headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

@@ -33,36 +33,36 @@
 
         <ion-item-divider></ion-item-divider>
 
-        <div *ngIf="!needARide[RideType.GoToRuth] && !canDrive[RideType.GoToRuth]">
+        <div *ngIf="!needARide[RideType.GO_TO_RUTH] && !canDrive[RideType.GO_TO_RUTH]">
           <ion-col>
-            <button (click)="addRider(RideType.GoToRuth)" ion-button icon-left clear>
+            <button (click)="addRider(RideType.GO_TO_RUTH)" ion-button icon-left clear>
               <ion-icon name="navigate"></ion-icon>
               <div>
-                I need a ride
+                Request a ride
               </div>
             </button>
           </ion-col>
           <ion-col>
-            <button (click)="addDriver(RideType.GoToRuth)" ion-button icon-left clear color="secondary">
+            <button (click)="addDriver(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
               <ion-icon name="car"></ion-icon>
               <div>
-                I have a car
+                Become a driver
               </div>
             </button>
           </ion-col>
         </div>
 
-        <ion-col *ngIf="needARide[RideType.GoToRuth]">
-          <button (click)="needARide[RideType.GoToRuth] = false" ion-button icon-left clear color="secondary">
+        <ion-col *ngIf="needARide[RideType.GO_TO_RUTH]">
+          <button (click)="cancelRideRequest(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
             <ion-icon name="close"></ion-icon>
             <div>Cancel ride request</div>
           </button>
         </ion-col>
 
-        <ion-col *ngIf="canDrive[RideType.GoToRuth]">
-          <button (click)="canDrive[RideType.GoToRuth] = false" ion-button icon-left clear color="secondary">
+        <ion-col *ngIf="canDrive[RideType.GO_TO_RUTH]">
+          <button (click)="cancelRideOffer(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
             <ion-icon name="close"></ion-icon>
-            <div>Remove my car</div>
+            <div>Cancel ride offer</div>
           </button>
         </ion-col>
 
@@ -92,36 +92,36 @@
 
         <ion-item-divider></ion-item-divider>
 
-        <div *ngIf="!needARide[RideType.GoHome] && !canDrive[RideType.GoHome]">
+        <div *ngIf="!needARide[RideType.GO_HOME] && !canDrive[RideType.GO_HOME]">
           <ion-col>
-            <button (click)="addRider(RideType.GoHome)" ion-button icon-left clear>
+            <button (click)="addRider(RideType.GO_HOME)" ion-button icon-left clear>
               <ion-icon name="navigate"></ion-icon>
               <div>
-                I need a ride
+                Request a ride
               </div>
             </button>
           </ion-col>
           <ion-col>
-            <button (click)="addDriver(RideType.GoHome)" ion-button icon-left clear color="secondary">
+            <button (click)="addDriver(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
               <ion-icon name="car"></ion-icon>
               <div>
-                I have a car
+                Become a driver
               </div>
             </button>
           </ion-col>
         </div>
 
-        <ion-col *ngIf="needARide[RideType.GoHome]">
-          <button (click)="needARide[RideType.GoHome] = false" ion-button icon-left clear color="secondary">
+        <ion-col *ngIf="needARide[RideType.GO_HOME]">
+          <button (click)="cancelRideRequest(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
             <ion-icon name="close"></ion-icon>
             <div>Cancel ride request</div>
           </button>
         </ion-col>
 
-        <ion-col *ngIf="canDrive[RideType.GoHome]">
-          <button (click)="canDrive[RideType.GoHome] = false" ion-button icon-left clear color="secondary">
+        <ion-col *ngIf="canDrive[RideType.GO_HOME]">
+          <button (click)="cancelRideOffer(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
             <ion-icon name="close"></ion-icon>
-            <div>Remove my car</div>
+            <div>Cancel ride offer</div>
           </button>
         </ion-col>
 

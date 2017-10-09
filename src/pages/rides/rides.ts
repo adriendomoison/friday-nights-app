@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {NativeStorage} from '@ionic-native/native-storage';
 import {ModalController, NavController, ToastController} from 'ionic-angular';
-import {Driver, DriverService, RideType} from '../../services/driver.service';
-import {RiderService} from '../../services/rider.service';
+import {Driver, DriverService} from '../../services/driver.service';
+import {Rider, RiderService} from '../../services/rider.service';
 import {AddressPage} from '../address/address';
 import {SeatsPage} from '../seats/seats';
+import {RideType, UserType, Utils} from '../../services/utils.service';
 
 declare let google: any;
 
@@ -16,8 +17,7 @@ declare let google: any;
 export class RidesPage {
 
   RideType: typeof RideType = RideType;
-  driversToGoToRuth: Driver[] = [];
-  driversToGoHome: Driver[] = [];
+  drivers: Driver[][] = [];
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];
   address: string;
@@ -29,6 +29,8 @@ export class RidesPage {
               private nativeStorage: NativeStorage,
               private riderService: RiderService,
               private driverService: DriverService) {
+    this.drivers[RideType.GO_HOME] = [];
+    this.drivers[RideType.GO_TO_RUTH] = [];
   }
 
   ionViewDidEnter() {
@@ -36,23 +38,23 @@ export class RidesPage {
       .then(address => this.address = address)
       .catch(() => {
       });
-    this.driverService.getDrivers(RideType.GoToRuth)
-      .then(drivers => this.driversToGoToRuth = drivers)
+    this.driverService.getDrivers(RideType.GO_TO_RUTH)
+      .then(drivers => this.drivers[RideType.GO_TO_RUTH] = drivers)
       .catch(() => {
       });
-    this.driverService.getDrivers(RideType.GoHome)
-      .then(drivers => this.driversToGoHome = drivers)
+    this.driverService.getDrivers(RideType.GO_HOME)
+      .then(drivers => this.drivers[RideType.GO_HOME] = drivers)
       .catch(() => {
       });
   }
 
-  showModalAddAddress(rideType: RideType) {
+  showModalAddAddress(origin: UserType) {
     let modal = this.modalCtrl.create(AddressPage);
     modal.onDidDismiss(data => {
       if (data) {
         this.address = data.description;
         this.nativeStorage.setItem('address', this.address);
-        this.addRider(rideType)
+        origin == UserType.RIDER ? this.addRider(RideType.GO_HOME) : this.addDriver(RideType.GO_HOME);
       }
     });
     modal.present();
@@ -70,19 +72,20 @@ export class RidesPage {
   }
 
   addDriver(rideType: RideType): void {
-    if (rideType == RideType.GoHome && !this.address)
-      return this.showModalAddAddress(RideType.GoHome);
+    if (rideType == RideType.GO_HOME && !this.address)
+      return this.showModalAddAddress(UserType.DRIVER);
     if (!this.seats)
-      return this.showModalSeats(RideType.GoHome);
+      return this.showModalSeats(rideType);
     let driver = new Driver;
-    driver.number_of_seat_left = this.seats;
-    driver.ride_type = rideType;
+    driver.number_of_seats = this.seats;
+    driver.ride_type = Utils.rideTypeToString(rideType);
+    driver.address = this.address;
     this.driverService.createDriver(driver)
       .then(() => {
         this.presentToastDriverAdded();
         this.canDrive[rideType] = true;
-        this.driverService.getDrivers(RideType.GoToRuth)
-          .then(drivers => this.driversToGoToRuth = drivers)
+        this.driverService.getDrivers(rideType)
+          .then(drivers => this.drivers[rideType] = drivers)
           .catch(() => {
           });
       })
@@ -90,14 +93,27 @@ export class RidesPage {
   }
 
   addRider(rideType: RideType): void {
-    if (rideType == RideType.GoHome && !this.address)
-      return this.showModalAddAddress(RideType.GoHome);
-    this.riderService.createRideRequest()
+    if (rideType == RideType.GO_HOME && !this.address)
+      return this.showModalAddAddress(UserType.RIDER);
+    let rider = new Rider;
+    rider.address = this.address;
+    rider.ride_type = Utils.rideTypeToString(rideType);
+    this.riderService.addRider(rider)
       .then(() => {
         this.presentToastRiderAdded();
         this.needARide[rideType] = true;
       })
       .catch(() => this.presentToastServerError())
+  }
+
+  cancelRideOffer(rideType: RideType) {
+    this.driverService.deleteDriver(rideType)
+      .then(() => this.canDrive[rideType] = false)
+  }
+
+  cancelRideRequest(rideType: RideType) {
+    this.riderService.deleteRider(rideType)
+      .then(() => this.needARide[rideType] = false)
   }
 
   presentToastServerError() {
@@ -110,7 +126,7 @@ export class RidesPage {
 
   presentToastDriverAdded() {
     let toast = this.toastCtrl.create({
-      message: '💌 Thank you so much for driving students, you are amazing.',
+      message: 'Thank you for driving students, you are awesome!',
       duration: 3000,
     });
     toast.present();
@@ -118,7 +134,7 @@ export class RidesPage {
 
   presentToastRiderAdded() {
     let toast = this.toastCtrl.create({
-      message: 'Ride request saved. We\'ll find you a safe drive home!',
+      message: 'Request saved. We\'ll find you a safe drive!',
       duration: 3000,
     });
     toast.present();
