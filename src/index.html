@@ -2,21 +2,27 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Ionic App</title>
+  <title>Friday Nights</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
+  <meta name="theme-color" content="#00BCD4">
 
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#4e8ef7">
-  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto:100,400" rel="stylesheet">
+
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
+
+  <script defer src="assets/scripts/fontawesome.min.js"></script>
+  <script defer src="assets/scripts/light.min.js"></script>
+  <script defer src="assets/scripts/brands.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCaFEVccoGDqwT7b34jS-QtAQzbD2RikHc&libraries=places"></script>
 
   <!-- un-comment this code to enable service worker
   <script>
@@ -44,6 +50,9 @@
 
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
+
+  <!-- Facebook connect -->
+  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 </body>
 </html>

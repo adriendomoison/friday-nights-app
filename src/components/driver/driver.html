@@ -1,0 +1,11 @@
+<ion-item color="none">
+  <ion-avatar item-left>
+    <img [src]="driver.profile_picture_url || 'assets/images/user.png'"/>
+  </ion-avatar>
+  <h2>
+    {{driver.first_name || 'A nice driver :)'}}
+  </h2>
+  <p>
+    {{driver.number_of_seats}} seats
+  </p>
+</ion-item>

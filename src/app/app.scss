@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,446 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+agm-map {
+  height: 150px;
+}
+
+.fn-secondary {
+  color: #455A64
+}
+
+.fn-inline {
+  display: inline-block
+}
+
+.fn-inline-center {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fn-back-to-line {
+  white-space: normal;
+}
+
+.fn-no-content-text {
+  font-size: large !important;
+  font-weight: 100 !important;
+  text-align: center;
+  white-space: normal !important;
+  padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.fn-no-content-image {
+  width: 128px;
+  padding: 15px;
+  margin: auto;
+  display: block;
+}
+
+.fn-card-text {
+  padding-top: 10px;
+  color: #000000;
+  white-space: normal
+}
+
+.fn-card-title {
+  white-space: normal !important;
+  font-weight: bold !important;
+  font-size: medium !important;
+  color: #212121;
+}
+
+.fn-menu {
+  background-color: #455A64;
+  color: #ffffff;
+}
+
+.fn-menu-icon-green {
+  color: #4CAF50;
+}
+
+.fn-menu-icon-red {
+  color: #f44336;
+}
+
+.fn-menu-profile {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.fn-menu-profile-picture {
+  border-radius: 100%;
+  width: 70px;
+}
+
+.fn-menu-profile-text {
+  padding-left: 20px;
+}
+
+.fn-menu-profile-name {
+  font-size: 20px;
+  font-weight: 100;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fn-menu-profile-name-sub-info {
+  font-size: 12px;
+}
+
+.fn-menu-elem-space {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  padding: 8px 0;
+}
+
+.fn-menu-elem-space-s {
+  display: inline-block;
+  text-align: center;
+}
+
+.fn-menu-elem {
+  padding-left: 5px;
+}
+
+.fn-modal-title {
+  font-weight: 100;
+  font-size: 25px;
+  font-family: Roboto, sans-serif;
+  white-space: normal;
+}
+
+.fn-modal-header {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+}
+
+.fn-modal-content {
+  width: 96%;
+  height: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.fn-div-content-center {
+  padding-top: 15px;
+}
+
+//
+// SuperTabs styles
+//
+
+super-tabs {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1;
+
+  > div.container {
+
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    z-index: 1;
+
+
+    > div.inner-container {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: flex;
+      box-sizing: content-box;
+
+    }
+
+
+  }
+
+  &:not([no-shadow]) {
+
+    &.tabs-placement-bottom {
+      > super-tabs-toolbar > ion-toolbar.toolbar::before {
+        top: -2px;
+        bottom: auto;
+        height: 2px;
+        background-position: 0 0;
+        content: '';
+      }
+    }
+
+    > super-tabs-toolbar > ion-toolbar.toolbar {
+      &::after, &::before {
+        position: absolute;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==);
+        background-repeat: repeat-x;
+        width: 100%;
+        left: 0;
+      }
+      &::after {
+        content: '';
+        height: 5px;
+        background-position: 0 -2px;
+        bottom: -5px;
+      }
+      contain: inherit;
+      display: block;
+      overflow: visible;
+    }
+
+  }
+
+}
+
+super-tabs.tabs-placement-bottom {
+
+  flex-direction: column-reverse;
+
+  > super-tabs-toolbar > ion-toolbar.toolbar {
+
+    padding: 0;
+
+    .tab-buttons-container {
+      .indicator {
+        top: 0;
+        bottom: auto;
+      }
+
+      ion-segment.segment.segment-md {
+        padding-top: 4px;
+      }
+    }
+
+    &.scroll-tabs .tab-buttons-container .indicator {
+      margin-top: 0;
+      margin-bottom: -2px;
+    }
+
+  }
+
+}
+
+ion-tabs super-tabs ion-content {
+  .scroll-content, .fixed-content {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+
+
+
+
+//
+// SuperTab styles
+//
+
+super-tab {
+
+  height: 100%;
+
+  box-sizing: border-box;
+  display: block;
+
+  overflow: hidden;
+  z-index: 1;
+
+  flex-shrink: 0;
+  position: relative;
+
+}
+
+
+
+
+
+//
+// SuperTabsContainer styles
+//
+
+super-tabs-container {
+
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  z-index: 1;
+
+  > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    box-sizing: content-box;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+}
+
+
+
+
+
+//
+// SuperTabsToolbar styles
+//
+
+super-tabs-toolbar {
+
+  z-index: 2;
+  width: 100%;
+  display: block;
+
+  > ion-toolbar.toolbar {
+
+    padding: 0;
+    min-height: 0;
+
+    .tab-buttons-container {
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      overflow: hidden;
+
+      .tab-buttons {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        super-tab-button {
+
+          &:not(.selected) {
+            ion-icon, span:not(.badge) {
+              opacity: 0.7;
+            }
+          }
+
+          text-align: center;
+
+          flex: 1;
+          width: 0;
+          height: 48px;
+          font-weight: 500;
+          font-size: 14px;
+          text-transform: uppercase;
+
+          margin-left: 0;
+          margin-right: 0;
+
+          position: relative;
+          display: block;
+          overflow: hidden;
+
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: pointer;
+
+          align-items: flex-end;
+          align-content: flex-end;
+
+          padding: 0 12px;
+
+          &.title-only {
+            .title {
+              line-height: 48px;
+            }
+          }
+
+          &.icon-only {
+            ion-icon {
+              line-height: 48px;
+            }
+          }
+
+          &.title-and-icon {
+            height: 72px;
+            padding-top: 8px;
+            ion-icon {
+              margin-bottom: 10px;
+            }
+          }
+
+          ion-icon {
+            font-size: 24px;
+          }
+
+          .title {
+            vertical-align: middle;
+            display: block;
+          }
+
+          .badge {
+            position: absolute;
+            top: 0;
+            right: 4px;
+          }
+
+        }
+
+      }
+
+      .indicator {
+        bottom: 0;
+        position: absolute;
+        z-index: 2;
+        height: 2px;
+        width: 100px;
+        transform: scaleX(0);
+        transform-origin: 0;
+      }
+
+    }
+
+    &.scroll-tabs {
+      .tab-buttons-container {
+        //padding-left: 60px;
+
+        .tab-buttons {
+          position: relative;
+          justify-content: flex-start;
+          super-tab-button {
+            min-width: 50px;
+            max-width: 100%;
+            width: auto;
+            display: inline-table;
+            overflow: visible;
+
+          }
+        }
+
+        .indicator {
+          position: relative;
+          margin-top: -2px;
+        }
+
+      }
+    }
+
+  }
+
+}

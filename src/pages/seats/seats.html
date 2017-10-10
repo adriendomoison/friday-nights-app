@@ -1,0 +1,30 @@
+<ion-header class="fn-modal-header">
+  <ion-toolbar>
+
+    <ion-buttons navPop style="padding: 5px">
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title class="fn-modal-header-box-title fn-back-to-line">
+      <span class="fn-modal-title">
+        How many <span style="text-decoration: underline;">available</span> seats do you have?
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fn-modal-content">
+  <div class="fn-div-content-center">
+    <button ion-button clear (click)="setSeats(2)">2 seats</button>
+    <button ion-button clear (click)="setSeats(3)">3 seats</button>
+    <button ion-button clear (click)="setSeats(4)">4 seats</button>
+    <button ion-button clear (click)="setSeats(6)">6 seats</button>
+  </div>
+  <ion-item class="fn-item-input">
+    <ion-label>other</ion-label>
+    <ion-input type="number" name="seats" [(ngModel)]="seats" min="0"></ion-input>
+  </ion-item>
+  <button ion-button clear (click)="setSeats(seats)">Add {{seats}} seats</button>
+</ion-content>

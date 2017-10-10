@@ -1,0 +1,131 @@
+<ion-content padding id="rides">
+
+  <div>
+    <ion-card *ngIf="address">
+      <ion-item>
+        <p style="font-weight: bold">
+          Your address:
+          <span tappable (click)="showModalAddAddress()" class="fn-secondary">{{address}}</span>
+        </p>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <h3 class="fn-card-title">
+            Rides to Ruth and Milt&#39;s house at 5:15pm from Craven Circle.
+          </h3>
+        </ion-item>
+
+        <div *ngIf="drivers[RideType.GO_TO_RUTH]?.length > 0;else no_content_for_drivers_to_go_to_ruth">
+          <driver *ngFor="let driver of drivers[RideType.GO_TO_RUTH]" [driver]="driver"></driver>
+        </div>
+
+        <ng-template #no_content_for_drivers_to_go_to_ruth>
+          <ion-item>
+            <p class="fn-no-content-text">
+              No rides available yet
+              <img class="fn-no-content-image" src="assets/images/ride_to_ruth.png"/>
+            </p>
+          </ion-item>
+        </ng-template>
+
+        <ion-item-divider></ion-item-divider>
+
+        <div *ngIf="!needARide[RideType.GO_TO_RUTH] && !canDrive[RideType.GO_TO_RUTH]">
+          <ion-col>
+            <button (click)="addRider(RideType.GO_TO_RUTH)" ion-button icon-left clear>
+              <ion-icon name="navigate"></ion-icon>
+              <div>
+                Request a ride
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="addDriver(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
+              <ion-icon name="car"></ion-icon>
+              <div>
+                Become a driver
+              </div>
+            </button>
+          </ion-col>
+        </div>
+
+        <ion-col *ngIf="needARide[RideType.GO_TO_RUTH]">
+          <button (click)="cancelRideRequest(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
+            <ion-icon name="close"></ion-icon>
+            <div>Cancel ride request</div>
+          </button>
+        </ion-col>
+
+        <ion-col *ngIf="canDrive[RideType.GO_TO_RUTH]">
+          <button (click)="cancelRideOffer(RideType.GO_TO_RUTH)" ion-button icon-left clear color="secondary">
+            <ion-icon name="close"></ion-icon>
+            <div>Cancel ride offer</div>
+          </button>
+        </ion-col>
+
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <h3 class="fn-card-title">
+            Rides home start at 10:00pm
+          </h3>
+        </ion-item>
+
+        <div *ngIf="drivers[RideType.GO_HOME]?.length > 0;else no_content_for_drivers_to_go_home">
+          <driver *ngFor="let driver of drivers[RideType.GO_HOME]" [driver]="driver"></driver>
+        </div>
+
+        <ng-template #no_content_for_drivers_to_go_home>
+          <ion-item>
+            <p class="fn-no-content-text">
+              No rides available yet
+              <img class="fn-no-content-image" src="assets/images/ride_home.png"/>
+            </p>
+          </ion-item>
+        </ng-template>
+
+        <ion-item-divider></ion-item-divider>
+
+        <div *ngIf="!needARide[RideType.GO_HOME] && !canDrive[RideType.GO_HOME]">
+          <ion-col>
+            <button (click)="addRider(RideType.GO_HOME)" ion-button icon-left clear>
+              <ion-icon name="navigate"></ion-icon>
+              <div>
+                Request a ride
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="addDriver(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
+              <ion-icon name="car"></ion-icon>
+              <div>
+                Become a driver
+              </div>
+            </button>
+          </ion-col>
+        </div>
+
+        <ion-col *ngIf="needARide[RideType.GO_HOME]">
+          <button (click)="cancelRideRequest(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
+            <ion-icon name="close"></ion-icon>
+            <div>Cancel ride request</div>
+          </button>
+        </ion-col>
+
+        <ion-col *ngIf="canDrive[RideType.GO_HOME]">
+          <button (click)="cancelRideOffer(RideType.GO_HOME)" ion-button icon-left clear color="secondary">
+            <ion-icon name="close"></ion-icon>
+            <div>Cancel ride offer</div>
+          </button>
+        </ion-col>
+
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>

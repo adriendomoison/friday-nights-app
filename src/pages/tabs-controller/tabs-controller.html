@@ -1,0 +1,17 @@
+<ion-header no-border>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Friday Nights
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<super-tabs id="mainTabs" indicatorColor="secondary" [config]="{ sideMenu: 'left' }" selectedTabIndex="1"
+            toolbarColor="light" style="padding-top: 50px">
+  <super-tab [root]="tab1Root" icon="car" #rides></super-tab>
+  <super-tab [root]="tab2Root" icon="paper" #updates></super-tab>
+  <super-tab [root]="tab3Root" icon="happy" #attendess></super-tab>
+</super-tabs>

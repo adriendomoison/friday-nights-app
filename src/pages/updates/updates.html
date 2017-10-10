@@ -1,0 +1,101 @@
+<ion-content padding id="update-page">
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <div class="show-list-numbers-and-dots">
+          <h3 class="fn-card-title">Message from Ruth and Milt</h3>
+          <p class="fn-card-text">
+            {{info.message || '*No message*'}}
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="!isRegistered && !info.is_past">
+    <ion-list>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14" [styles]="map_style" [streetViewControl]="false"
+               [scrollwheel]="false" [zoomControl]="false" [disableDoubleClickZoom]="true" [mapDraggable]="false">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+      <ion-item>
+        <h3 class="fn-card-title">
+          📅 Will you attend friday night {{info.date}}?
+        </h3>
+        <p class="fn-card-text">
+          <span class="fn-info-name">When</span>:
+          {{info.starting_time || '5:30pm'}}
+        </p>
+        <p class="fn-card-text">
+          <span style="text-decoration: underline; font-weight: bold">Where</span>:
+          {{info.location || '697 Shenandoah Ave. San Marcos, CA 92078'}}
+        </p>
+      </ion-item>
+
+      <ion-col>
+        <button (click)="setAttendanceToYes()" ion-button icon-left clear>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>I'll be there</div>
+        </button>
+      </ion-col>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <div id="updates-markdown9" class="show-list-numbers-and-dots">
+          <h3 class="fn-card-title">
+            Need some more information or would like to help? Feel free to contact us!
+          </h3>
+        </div>
+      </ion-item>
+      <ion-item color="none">
+        <ion-avatar item-left>
+          <img src="assets/images/ruth.jpg"/>
+        </ion-avatar>
+        <h2>
+          Ruth Bran
+        </h2>
+      </ion-item>
+
+      <div *ngIf="!wantToText">
+        <ion-col>
+          <button color="secondary" (click)="callRuth()" ion-button icon-left clear>
+            <ion-icon name="call"></ion-icon>
+            <div>Call</div>
+          </button>
+        </ion-col>
+
+        <ion-col>
+          <button color="secondary" (click)="wantToText = true" ion-button icon-left clear>
+            <ion-icon name="text"></ion-icon>
+            <div>Text</div>
+          </button>
+        </ion-col>
+      </div>
+
+      <div *ngIf="wantToText" text-right>
+
+        <ion-item>
+          <ion-textarea type="text" placeholder="Text" [(ngModel)]="text"></ion-textarea>
+        </ion-item>
+
+        <ion-col>
+          <button color="secondary" (click)="wantToText = false" ion-button icon-left clear>
+            <ion-icon name="close"></ion-icon>
+            <div>cancel</div>
+          </button>
+        </ion-col>
+
+        <ion-col>
+          <button (click)="sendMessageToRuth()" ion-button icon-left clear>
+            <ion-icon name="send"></ion-icon>
+            <div>Send</div>
+          </button>
+        </ion-col>
+      </div>
+
+    </ion-list>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-content padding id="attendees">
+  <ion-card id="user">
+    <ion-list id="profile">
+      <ion-item>
+        <p class="fn-next-event-announcement">
+          Next friday night: <span class="fn-next-event-date">{{info.date || 'TBA'}}</span>
+        </p>
+      </ion-item>
+      <ion-item color="none" id="avatar">
+        <ion-avatar item-left>
+          <img [src]="user.profile_picture_url || 'assets/images/user.png'"/>
+        </ion-avatar>
+        <h2>
+          {{user.first_name || 'You'}} {{user.last_name}}
+        </h2>
+      </ion-item>
+      <ion-item id="attendance">
+        <ion-label class="fn-back-to-line">
+          Are you coming friday?
+        </ion-label>
+        <ion-toggle color="secondary"
+                    (ngModelChange)="updateAttendance()"
+                    [(ngModel)]="user.next_event_attendance_status"
+                    [disabled]="info.is_past"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="!info.is_past || (attendees && attendees.length > 0)" id="attendee-list-card">
+    <ion-list>
+      <ion-item id="attendee-list-title">
+        <h3 class="fn-card-title" *ngIf="!info.is_past">See who is coming this friday night!</h3>
+        <h3 class="fn-card-title" *ngIf="info.is_past">See who came last friday night!</h3>
+      </ion-item>
+
+      <div *ngIf="attendees_is_loaded; else not_loaded">
+        <div *ngIf="attendees && attendees.length > 0; else no_content">
+          <attendee id="attendee-list" *ngFor="let attendee of attendees" [attendee]="attendee"></attendee>
+        </div>
+        <ng-template #no_content>
+          <ion-item>
+            <p class="fn-no-content-text">
+              Hi there 😎 ! Looks like you'll be the first to let us know you are coming!
+              <img class="fn-no-content-image" src="assets/images/nobody_registered.png"/>
+            </p>
+          </ion-item>
+        </ng-template>
+      </div>
+
+      <ng-template #not_loaded>
+        <div class="fn-loading-spinner-box">
+          <ion-spinner clear="fn-loading-spinner" name="crescent"></ion-spinner>
+        </div>
+      </ng-template>
+
+    </ion-list>
+  </ion-card>
+</ion-content>

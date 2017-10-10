@@ -1,1 +1,44 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-content class="fn-menu">
+    <ion-item color="none" id="avatar" class="fn-menu fn-menu-profile" no-lines>
+      <div class="fn-inline-center">
+        <img class="fn-menu-profile-picture" [src]="user.profile_picture_url || 'assets/images/user.png'"/>
+      </div>
+      <div class="fn-inline-center fn-menu-profile-text">
+        <div>
+          <h2>
+            <span class="fn-menu-profile-name">
+              {{user.first_name || 'You'}} {{user.last_name}}
+            </span>
+          </h2>
+        </div>
+        <div *ngIf="user.next_event_attendance_status" class="fn-menu-profile-name-sub-info">
+          <div class="fn-menu-elem-space-s fn-menu-icon-green" item-left>
+            <i class="fal fa-thumbs-up" aria-hidden="true"></i>
+          </div>
+          <span class="fn-menu-elem">Registered</span>
+        </div>
+        <div *ngIf="!user.next_event_attendance_status" class="fn-menu-profile-name-sub-info">
+          <div class="fn-menu-elem-space-s fn-menu-icon-red" item-left>
+            <i class="fal fa-times-circle" aria-hidden="true"></i>
+          </div>
+          <span class="fn-menu-elem">Not registered</span>
+        </div>
+      </div>
+    </ion-item>
+    <button no-lines ion-item menuClose (click)="openSettings()" class="fn-menu">
+      <div class="fn-menu-elem-space" item-left>
+        <i class="fal fa-cog" data-fa-transform="grow-8" aria-hidden="true"></i>
+      </div>
+      <span class="fn-menu-elem">Settings</span>
+    </button>
+    <button no-lines ion-item menuClose (click)="logout()" class="fn-menu">
+      <div class="fn-menu-elem-space" item-left>
+        <i class="fal fa-sign-out" data-fa-transform="grow-8" aria-hidden="true"></i>
+      </div>
+      <span class="fn-menu-elem">Logout</span>
+    </button>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
