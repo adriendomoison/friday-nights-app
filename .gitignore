@@ -36,3 +36,7 @@ UserInterfaceState.xcuserstate
 /FridayNights.keystore
 /release-signing.properties
 /google-services.json
+/resources/
+!/resources/icon.png
+!/resources/README.md
+!/resources/splash.png
