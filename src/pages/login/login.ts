@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, Platform, ToastController} from 'ionic-angular';
 import {AccountService, FacebookCredentials, UserNotificationToken} from '../../services/account.service';
+import {environment} from '../../environments/environment';
 import {Facebook} from '@ionic-native/facebook';
 import {Push, PushObject, PushOptions} from '@ionic-native/push';
 import {TabsControllerPage} from '../tabs-controller/tabs-controller';
