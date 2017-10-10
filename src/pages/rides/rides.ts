@@ -83,6 +83,7 @@ export class RidesPage {
       if (data) {
         this.seats = data.seats;
         this.addDriver(rideType);
+        this.seats = 0;
       }
     });
     modal.present();
