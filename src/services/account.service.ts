@@ -21,6 +21,13 @@ export class Account {
   picture: string;
 }
 
+export class RideStatus {
+  is_rider_to_ruth: boolean;
+  is_rider_home: boolean;
+  is_driver_to_ruth: boolean;
+  is_driver_home: boolean;
+}
+
 export class UserNotificationToken {
   constructor(public email: string, public push_notification_token: string) {
   }
@@ -210,6 +217,15 @@ export class AccountService {
       .put(url, JSON.stringify(userNotificationToken), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
+
+  getUserRideStatus(): Promise<RideStatus> {
+    const url = `${environment.API_URL}/api/v1/rides/status`;
+    this.headers.set('Authorization', 'Bearer ' + this.getAuth().access_token);
+    return this.http.get(url, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as RideStatus)
       .catch(this.handleError);
   }
 

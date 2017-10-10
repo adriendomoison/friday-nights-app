@@ -6,6 +6,7 @@ import {Rider, RiderService} from '../../services/rider.service';
 import {AddressPage} from '../address/address';
 import {SeatsPage} from '../seats/seats';
 import {RideType, UserType, Utils} from '../../services/utils.service';
+import {AccountService} from '../../services/account.service';
 
 declare let google: any;
 
@@ -26,6 +27,7 @@ export class RidesPage {
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               public modalCtrl: ModalController,
+              public accountService: AccountService,
               private nativeStorage: NativeStorage,
               private riderService: RiderService,
               private driverService: DriverService) {
@@ -38,6 +40,11 @@ export class RidesPage {
       .then(address => this.address = address)
       .catch(() => {
       });
+    this.fetchDriverList();
+    this.fetchMyStatus();
+  }
+
+  private fetchDriverList() {
     this.driverService.getDrivers(RideType.GO_TO_RUTH)
       .then(drivers => this.drivers[RideType.GO_TO_RUTH] = drivers)
       .catch(() => {
@@ -47,6 +54,17 @@ export class RidesPage {
       .catch(() => {
       });
   }
+
+  private fetchMyStatus() {
+    this.accountService.getUserRideStatus()
+      .then(status => {
+        this.canDrive[RideType.GO_TO_RUTH] = status.is_driver_to_ruth;
+        this.canDrive[RideType.GO_HOME] = status.is_driver_home;
+        this.needARide[RideType.GO_TO_RUTH] = status.is_rider_to_ruth;
+        this.needARide[RideType.GO_HOME] = status.is_rider_home;
+      })
+  }
+
 
   showModalAddAddress(origin: UserType) {
     let modal = this.modalCtrl.create(AddressPage);
@@ -108,12 +126,22 @@ export class RidesPage {
 
   cancelRideOffer(rideType: RideType) {
     this.driverService.deleteDriver(rideType)
-      .then(() => this.canDrive[rideType] = false)
+      .then(() => {
+        this.canDrive[rideType] = false;
+        this.presentToastDriverDeleted();
+        this.driverService.getDrivers(rideType)
+          .then(drivers => this.drivers[rideType] = drivers)
+          .catch(() => {
+          });
+      })
   }
 
   cancelRideRequest(rideType: RideType) {
     this.riderService.deleteRider(rideType)
-      .then(() => this.needARide[rideType] = false)
+      .then(() => {
+        this.needARide[rideType] = false;
+        this.presentToastRiderDeleted();
+      })
   }
 
   presentToastServerError() {
@@ -127,6 +155,22 @@ export class RidesPage {
   presentToastDriverAdded() {
     let toast = this.toastCtrl.create({
       message: 'Thank you for driving students, you are awesome!',
+      duration: 3000,
+    });
+    toast.present();
+  }
+
+  presentToastDriverDeleted() {
+    let toast = this.toastCtrl.create({
+      message: 'You have been removed from the driver list.',
+      duration: 3000,
+    });
+    toast.present();
+  }
+
+  presentToastRiderDeleted() {
+    let toast = this.toastCtrl.create({
+      message: 'Your ride has been successfully canceled.',
       duration: 3000,
     });
     toast.present();
