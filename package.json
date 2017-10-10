@@ -49,8 +49,7 @@
     "phonegap-plugin-push": "^2.0.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "mx.ferreyra.callnumber": "~0.0.2"
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.0",
@@ -79,8 +78,7 @@
       "phonegap-plugin-push": {
         "SENDER_ID": "797816708457"
       },
-      "cordova-plugin-nativestorage": {},
-      "mx.ferreyra.callnumber": {}
+      "cordova-plugin-nativestorage": {}
     }
   }
 }

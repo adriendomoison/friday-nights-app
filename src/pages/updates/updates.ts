@@ -294,12 +294,12 @@ export class UpdatesPage {
     if (!this.accountService.isConnected)
       this.navCtrl.setRoot(LoginPage);
     else {
-      this.fetchEventInfo();
+      this.fetchEvent();
       this.fetchProfile();
     }
   }
 
-  private fetchEventInfo(): void {
+  private fetchEvent(): void {
     this.eventService.getEvent()
       .then(info => {
         this.info = info;
