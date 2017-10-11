@@ -36,9 +36,7 @@ export class LoginPage {
       });
 
     const options: PushOptions = {
-      android: {
-        // senderID: '797816708457', // TODO move it to the JSON file as v2.0 spec requires
-      },
+      android: {},
       ios: {
         alert: 'true',
         badge: true,

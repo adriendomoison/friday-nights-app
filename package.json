@@ -44,7 +44,7 @@
     "cordova-sms-plugin": "^0.1.11",
     "ionic-angular": "3.7.1",
     "ionic-plugin-keyboard": "^2.2.1",
-    "ionic2-super-tabs": "^4.1.0",
+    "ionic2-super-tabs": "^4.1.3",
     "ionicons": "3.0.0",
     "phonegap-plugin-push": "^2.0.0",
     "rxjs": "5.4.3",
