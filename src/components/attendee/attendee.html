@@ -6,6 +6,11 @@
     {{attendee.first_name}}
   </h2>
   <p>
-    {{attendee.home_country}}・{{attendee.attendance_count + 1}}{{attendance_count_suffix}} time
+    <span class="fn-flag-sm">
+      <img [src]="'https://lipis.github.io/flag-icon-css/flags/4x3/' + country_code + '.svg'"/>
+    </span>
+    <span class="fn-flag-text">
+      {{attendee.home_country}}・{{attendee.attendance_count + 1}}{{attendance_count_suffix}} time
+    </span>
   </p>
 </ion-item>
