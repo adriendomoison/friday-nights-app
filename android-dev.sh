@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ionic cordova run android -l
+ionic cordova run android -l --device

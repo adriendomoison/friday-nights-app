@@ -16,6 +16,7 @@ import {AccountService} from '../../services/account.service';
 export class RidesPage {
 
   RideType: typeof RideType = RideType;
+  UserType: typeof UserType = UserType;
   drivers: Driver[][] = [];
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];

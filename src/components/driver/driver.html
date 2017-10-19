@@ -2,10 +2,30 @@
   <ion-avatar item-left>
     <img [src]="driver.profile_picture_url || 'assets/images/user.png'"/>
   </ion-avatar>
-  <h2>
-    {{driver.first_name || 'A nice driver :)'}}
-  </h2>
-  <p>
+  <div>
+    <div class="fn-inline-center">
+      <h2>
+        {{driver.first_name || 'A Driver 🚗'}}
+      </h2>
+    </div>
+    <div class="fn-inline-center fn-driver-tag"
+         [ngClass]="{'fn-attending': driver.status == 'OFFERED', 'fn-leaving': driver.status == 'LEAVING', 'fn-canceled': driver.status == 'CANCELED', 'fn-gone': driver.status == 'GONE'}">
+      <span *ngIf="driver.status == 'OFFERED'; else no_restriction">
+        RIDE OFFERED
+      </span>
+      <ng-template #no_restriction>
+      {{driver.status}}
+      </ng-template>
+    </div>
+  </div>
+  <div>
+    <div class="fn-riders-mini">
+      <span class="fn-rider-mini-block" *ngFor="let rider of driver.riders">
+        <ion-avatar class="fn-rider-mini">
+          <img class="fn-rider-mini-img" [src]="rider.profile_picture_url || 'assets/images/user.png'"/>
+        </ion-avatar>
+      </span>
+    </div>
     {{driver.number_of_seats}} seats
-  </p>
+  </div>
 </ion-item>
