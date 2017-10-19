@@ -56,7 +56,7 @@ export class AttendeesPage {
   }
 
   updateAttendance(): void {
-    this.user.next_event_attendance_status
+    this.user.attendance_status
       ? this.attendeeService.deleteAttendance()
       .then(() => {
         this.presentToastDeregistrationSuccess();
@@ -72,7 +72,7 @@ export class AttendeesPage {
   }
 
   attendanceStatusUpdateError() {
-    this.user.next_event_attendance_status = !this.user.next_event_attendance_status;
+    this.user.attendance_status = !this.user.attendance_status;
     let toast = this.toastCtrl.create({
       message: 'Oh no! Something bad happened. Please come back later when we fixed that problem. Thanks.',
       duration: 4000,
