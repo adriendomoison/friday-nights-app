@@ -1,5 +1,14 @@
 <ion-content padding id="rides">
 
+  <div *ngIf="event.is_past; else show_rides">
+    <p class="fn-no-content-text">
+      No event to ride to
+      <img class="fn-no-content-image" src="assets/images/balloons.png"/>
+    </p>
+  </div>
+
+  <ng-template #show_rides>
+
     <ion-card *ngIf="address">
       <ion-item>
         <p style="font-weight: bold">
@@ -126,5 +135,7 @@
 
       </ion-list>
     </ion-card>
+  </ng-template>
+
   <div class="fn-notification-space"></div>
 </ion-content>

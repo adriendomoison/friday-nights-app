@@ -19,7 +19,7 @@ export class AttendeesPage {
 
   constructor(public navCtrl: NavController,
               public accountService: AccountService,
-              public infoService: EventService,
+              public eventService: EventService,
               public toastCtrl: ToastController,
               private attendeeService: AttendeeService) {
   }
@@ -28,14 +28,14 @@ export class AttendeesPage {
     if (!this.accountService.isConnected)
       this.navCtrl.setRoot(LoginPage);
     else {
-      this.fetchEventInfo();
+      this.fetchEvent();
       this.fetchProfile();
       this.fetchAttendeeList();
     }
   }
 
-  fetchEventInfo(): void {
-    this.infoService.getEvent()
+  fetchEvent(): void {
+    this.eventService.getEvent()
       .then(info => this.info = info)
       .catch(() => this.info.is_past = true);
   }
