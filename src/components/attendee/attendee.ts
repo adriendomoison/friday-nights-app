@@ -9,7 +9,7 @@ export class AttendeeComponent {
 
   @Input() attendee: Attendee = new Attendee;
   attendance_count_suffix: string = 'th';
-  country_code: string = 'us';
+  country_code: string;
   country_codes: any = new Map<string, string>();
 
   constructor() {
@@ -270,6 +270,6 @@ export class AttendeeComponent {
     } else if ((this.attendee.attendance_count + 1) % 10 == 3) {
       this.attendance_count_suffix = 'rd'
     }
-    this.country_code = this.country_codes.get(this.attendee.home_country)
+    this.country_code = this.country_codes.get(this.attendee.home_country);
   }
 }
