@@ -12,7 +12,7 @@
     </ion-list>
   </ion-card>
 
-  <ion-card *ngIf="!isRegistered && !info.is_past">
+  <ion-card *ngIf="!isRegistered && !info.is_started">
     <ion-list>
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14" [styles]="map_style" [streetViewControl]="false"
                [scrollwheel]="false" [zoomControl]="false" [disableDoubleClickZoom]="true" [mapDraggable]="false">
