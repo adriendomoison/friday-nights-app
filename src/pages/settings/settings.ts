@@ -1,5 +1,5 @@
-import {Component, NgZone} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, ToastController} from 'ionic-angular';
 import {AccountService, User, UserChangePassword} from '../../services/account.service';
 import {LoginPage} from '../login/login';
 
@@ -9,24 +9,15 @@ import {LoginPage} from '../login/login';
 })
 export class SettingsPage {
 
-  section: number;
   user: User;
   userChangePassword: UserChangePassword;
   password_re: string;
-  width: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private accountService: AccountService, ngZone: NgZone) {
-    this.section = 1;
+  constructor(public navCtrl: NavController,
+              private toastCtrl: ToastController,
+              private accountService: AccountService) {
     this.user = new User;
     this.userChangePassword = new UserChangePassword;
-    this.width = window.innerWidth;
-
-    window.onresize = (e) => {
-      ngZone.run(() => {
-        this.width = window.innerWidth;
-      });
-    };
   }
 
   ngOnInit() {
@@ -39,7 +30,7 @@ export class SettingsPage {
 
   updateBasicInfo(): void {
     this.accountService.updateUserAccount(this.user)
-      .then()
+      .then(() => this.presentToastChangeSaved())
   }
 
   updatePassword(): void {
@@ -56,5 +47,13 @@ export class SettingsPage {
             this.navCtrl.setRoot(LoginPage);
           })
       })
+  }
+
+  presentToastChangeSaved() {
+    let toast = this.toastCtrl.create({
+      message: 'Your changes have been saved!',
+      duration: 2000,
+    });
+    toast.present();
   }
 }
