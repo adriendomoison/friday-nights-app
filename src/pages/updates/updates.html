@@ -2,12 +2,16 @@
   <ion-card>
     <ion-list>
       <ion-item>
-        <div class="show-list-numbers-and-dots">
-          <h3 class="fn-card-title">Message from Ruth and Milt</h3>
-          <p class="fn-card-text">
-            {{info.message || '*No message*'}}
-          </p>
-        </div>
+        <p class="fn-next-event-announcement">
+          Next friday night: <span class="fn-next-event-date">{{info.date || 'TBA'}}</span>
+        </p>
+        <p class="fn-card-text">
+          {{info.message || '*No message*'}}
+        </p>
+        <p *ngIf="info.message" class="fn-card-text">
+          --<br/>
+          Ruth and Milt
+        </p>
       </ion-item>
     </ion-list>
   </ion-card>

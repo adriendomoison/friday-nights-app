@@ -6,9 +6,9 @@
     {{attendee.first_name}}
   </h2>
   <p>
-    <span class="fn-flag-sm">
-      <img *ngIf="country_code" [src]="'https://lipis.github.io/flag-icon-css/flags/4x3/' + country_code + '.svg'"/>
-      <img *ngIf="!country_code" src="https://upload.wikimedia.org/wikipedia/gl/thumb/e/e4/Sen_bandeira.svg/500px-Sen_bandeira.svg.png"/>
+    <span *ngIf="country_code" [class]="'flag-icon fn-flag-sm flag-icon-' + country_code"></span>
+    <span *ngIf="!country_code" class="fn-flag-sm">
+      <img  src="https://upload.wikimedia.org/wikipedia/gl/thumb/e/e4/Sen_bandeira.svg/500px-Sen_bandeira.svg.png"/>
     </span>
     <span class="fn-flag-text">
       {{attendee.home_country || 'A Foreign Country'}}・{{attendee.attendance_count + 1}}{{attendance_count_suffix}} time

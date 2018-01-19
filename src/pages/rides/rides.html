@@ -31,15 +31,8 @@
         </div>
 
         <ng-template #no_content_for_drivers_to_go_to_ruth>
-          <ion-item>
-            <p class="fn-no-content-text">
-              No rides available yet
-              <img class="fn-no-content-image" src="assets/images/ride_to_ruth.png"/>
-            </p>
-          </ion-item>
+          <img src="assets/images/goTo.jpg" />
         </ng-template>
-
-        <ion-item-divider></ion-item-divider>
 
         <div *ngIf="!needARide[RideType.GO_TO_RUTH] && !canDrive[RideType.GO_TO_RUTH]">
           <ion-col>
@@ -90,15 +83,8 @@
         </div>
 
         <ng-template #no_content_for_drivers_to_go_home>
-          <ion-item>
-            <p class="fn-no-content-text">
-              No rides available yet
-              <img class="fn-no-content-image" src="assets/images/ride_home.png"/>
-            </p>
-          </ion-item>
+          <img src="assets/images/goHome.jpg" />
         </ng-template>
-
-        <ion-item-divider></ion-item-divider>
 
         <div *ngIf="!needARide[RideType.GO_HOME] && !canDrive[RideType.GO_HOME]">
           <ion-col>
