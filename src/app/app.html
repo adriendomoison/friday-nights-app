@@ -12,13 +12,13 @@
             </span>
           </h2>
         </div>
-        <div *ngIf="user.next_event_attendance_status" class="fn-menu-profile-name-sub-info">
+        <div *ngIf="user.attendance_status" class="fn-menu-profile-name-sub-info">
           <div class="fn-menu-elem-space-s fn-menu-icon-green" item-left>
             <i class="fal fa-thumbs-up" aria-hidden="true"></i>
           </div>
           <span class="fn-menu-elem">Registered</span>
         </div>
-        <div *ngIf="!user.next_event_attendance_status" class="fn-menu-profile-name-sub-info">
+        <div *ngIf="!user.attendance_status" class="fn-menu-profile-name-sub-info">
           <div class="fn-menu-elem-space-s fn-menu-icon-red" item-left>
             <i class="fal fa-times-circle" aria-hidden="true"></i>
           </div>

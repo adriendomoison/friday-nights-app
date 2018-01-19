@@ -41,6 +41,7 @@ export class User {
   username: string;
   birthday: string;
   phone_number: string;
+  home_country: string;
   profile_public_id: string;
   account_creation_date: string;
 }
@@ -62,10 +63,9 @@ export class AccountService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private auth = new Auth();
   private account = new Account();
-  public isConnected: boolean;
+  public isConnected: boolean = false;
 
   constructor(private http: Http, private nativeStorage: NativeStorage) {
-    this.isConnected = false;
   }
 
   getAuth(): Auth {

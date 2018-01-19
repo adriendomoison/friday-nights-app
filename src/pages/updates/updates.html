@@ -2,17 +2,21 @@
   <ion-card>
     <ion-list>
       <ion-item>
-        <div class="show-list-numbers-and-dots">
-          <h3 class="fn-card-title">Message from Ruth and Milt</h3>
-          <p class="fn-card-text">
-            {{info.message || '*No message*'}}
-          </p>
-        </div>
+        <p class="fn-next-event-announcement">
+          Next friday night: <span class="fn-next-event-date">{{info.date || 'TBA'}}</span>
+        </p>
+        <p class="fn-card-text">
+          {{info.message || '*No message*'}}
+        </p>
+        <p *ngIf="info.message" class="fn-card-text">
+          --<br/>
+          Ruth and Milt
+        </p>
       </ion-item>
     </ion-list>
   </ion-card>
 
-  <ion-card *ngIf="!isRegistered && !info.is_past">
+  <ion-card *ngIf="!isRegistered && !info.is_started">
     <ion-list>
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14" [styles]="map_style" [streetViewControl]="false"
                [scrollwheel]="false" [zoomControl]="false" [disableDoubleClickZoom]="true" [mapDraggable]="false">

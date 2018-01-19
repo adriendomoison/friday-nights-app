@@ -1,27 +1,14 @@
 <ion-content padding id="attendees">
   <ion-card id="user">
     <ion-list id="profile">
-      <ion-item>
-        <p class="fn-next-event-announcement">
-          Next friday night: <span class="fn-next-event-date">{{info.date || 'TBA'}}</span>
-        </p>
-      </ion-item>
-      <ion-item color="none" id="avatar">
-        <ion-avatar item-left>
-          <img [src]="user.profile_picture_url || 'assets/images/user.png'"/>
-        </ion-avatar>
-        <h2>
-          {{user.first_name || 'You'}} {{user.last_name}}
-        </h2>
-      </ion-item>
       <ion-item id="attendance">
         <ion-label class="fn-back-to-line">
-          Are you coming friday?
+          {{user.first_name}}, are you coming this friday night <span class="fn-next-event-date">{{info.date}}</span>?
         </ion-label>
         <ion-toggle color="secondary"
                     (ngModelChange)="updateAttendance()"
-                    [(ngModel)]="user.next_event_attendance_status"
-                    [disabled]="info.is_past"></ion-toggle>
+                    [(ngModel)]="user.attendance_status"
+                    [disabled]="info.is_started"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-card>

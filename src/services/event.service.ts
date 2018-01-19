@@ -12,6 +12,7 @@ export class Event {
   location: string;
   message: string;
   is_past: boolean;
+  is_started: boolean;
 }
 
 @Injectable()

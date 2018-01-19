@@ -12,7 +12,7 @@ export class Attendee {
   last_name: string;
   home_country: string;
   profile_picture_url: string;
-  next_event_attendance_status: boolean;
+  attendance_status: boolean;
   attendance_count: number;
 }
 
@@ -61,7 +61,7 @@ export class AttendeeService {
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => {
-        this.profileLatest.next_event_attendance_status = false;
+        this.profileLatest.attendance_status = false;
         this.profile.next(this.profileLatest)
       })
       .catch(this.handleError);

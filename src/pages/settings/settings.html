@@ -25,6 +25,11 @@
     </ion-item>
 
     <ion-item>
+      <ion-label floating>Home country</ion-label>
+      <ion-input type="text" name="home_country" pattern="[a-zA-Z]+" [(ngModel)]="user.home_country" required></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label floating>Birthday</ion-label>
       <ion-input type="text" name="birthday" [(ngModel)]="user.birthday"
                  pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"></ion-input>

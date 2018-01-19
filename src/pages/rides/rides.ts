@@ -7,26 +7,30 @@ import {AddressPage} from '../address/address';
 import {SeatsPage} from '../seats/seats';
 import {RideType, UserType, Utils} from '../../services/utils.service';
 import {AccountService} from '../../services/account.service';
+import {Event, EventService} from '../../services/event.service';
 
 @Component({
   selector: 'page-rides',
   templateUrl: 'rides.html',
-  providers: [DriverService, RiderService]
+  providers: [DriverService, RiderService, EventService]
 })
 export class RidesPage {
 
   RideType: typeof RideType = RideType;
+  UserType: typeof UserType = UserType;
   drivers: Driver[][] = [];
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];
   address: string;
   seats: number;
+  event: Event = new Event;
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
               public modalCtrl: ModalController,
               public accountService: AccountService,
               private nativeStorage: NativeStorage,
+              private eventService: EventService,
               private riderService: RiderService,
               private driverService: DriverService,
               private utils: Utils) {
@@ -39,8 +43,15 @@ export class RidesPage {
       .then(address => this.address = address)
       .catch(() => {
       });
+    this.fetchEvent();
     this.fetchDriverList();
     this.fetchMyStatus();
+  }
+
+  private fetchEvent(): void {
+    this.eventService.getEvent()
+      .then(info => this.event = info)
+      .catch(() => this.event.is_past = true);
   }
 
   private fetchDriverList() {

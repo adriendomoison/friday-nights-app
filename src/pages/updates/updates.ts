@@ -320,8 +320,8 @@ export class UpdatesPage {
   }
 
   private fetchProfile(): void {
-    this.isRegistered = this.attendeeService.profileLatest.next_event_attendance_status;
-    this.attendeeService.profileObs$.subscribe(profile => this.isRegistered = profile.next_event_attendance_status);
+    this.isRegistered = this.attendeeService.profileLatest.attendance_status;
+    this.attendeeService.profileObs$.subscribe(profile => this.isRegistered = profile.attendance_status);
   }
 
   callRuth(): void {

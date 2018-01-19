@@ -1,10 +1,19 @@
 <ion-content padding id="rides">
 
+  <div *ngIf="event.is_past; else show_rides">
+    <p class="fn-no-content-text">
+      No event to ride to
+      <img class="fn-no-content-image" src="assets/images/balloons.png"/>
+    </p>
+  </div>
+
+  <ng-template #show_rides>
+
     <ion-card *ngIf="address">
       <ion-item>
         <p style="font-weight: bold">
           Your address:
-          <span tappable (click)="showModalAddAddress()" class="fn-secondary">{{address}}</span>
+          <span tappable (click)="showModalAddAddress(UserType.RIDER)" class="fn-secondary">{{address}}</span>
         </p>
       </ion-item>
     </ion-card>
@@ -22,15 +31,8 @@
         </div>
 
         <ng-template #no_content_for_drivers_to_go_to_ruth>
-          <ion-item>
-            <p class="fn-no-content-text">
-              No rides available yet
-              <img class="fn-no-content-image" src="assets/images/ride_to_ruth.png"/>
-            </p>
-          </ion-item>
+          <img src="assets/images/goTo.jpg" />
         </ng-template>
-
-        <ion-item-divider></ion-item-divider>
 
         <div *ngIf="!needARide[RideType.GO_TO_RUTH] && !canDrive[RideType.GO_TO_RUTH]">
           <ion-col>
@@ -81,15 +83,8 @@
         </div>
 
         <ng-template #no_content_for_drivers_to_go_home>
-          <ion-item>
-            <p class="fn-no-content-text">
-              No rides available yet
-              <img class="fn-no-content-image" src="assets/images/ride_home.png"/>
-            </p>
-          </ion-item>
+          <img src="assets/images/goHome.jpg" />
         </ng-template>
-
-        <ion-item-divider></ion-item-divider>
 
         <div *ngIf="!needARide[RideType.GO_HOME] && !canDrive[RideType.GO_HOME]">
           <ion-col>
@@ -126,5 +121,7 @@
 
       </ion-list>
     </ion-card>
+  </ng-template>
+
   <div class="fn-notification-space"></div>
 </ion-content>
