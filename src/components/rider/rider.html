@@ -1,0 +1,12 @@
+<ion-item color="none">
+  <ion-avatar item-left>
+    <img [src]="rider.profile_picture_url || 'assets/images/user.png'"/>
+  </ion-avatar>
+  <div>
+    <div class="fn-inline-center">
+      <h2>
+        {{rider.first_name || 'A Rider 🚗'}} (rider)
+      </h2>
+    </div>
+  </div>
+</ion-item>

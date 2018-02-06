@@ -19,6 +19,7 @@ export class RidesPage {
   RideType: typeof RideType = RideType;
   UserType: typeof UserType = UserType;
   drivers: Driver[][] = [];
+  riders: Rider[][] = [];
   canDrive: boolean[] = [false, false];
   needARide: boolean[] = [false, false];
   address: string;
@@ -35,7 +36,9 @@ export class RidesPage {
               private driverService: DriverService,
               private utils: Utils) {
     this.drivers[RideType.GO_HOME] = [];
+    this.riders[RideType.GO_HOME] = [];
     this.drivers[RideType.GO_TO_RUTH] = [];
+    this.riders[RideType.GO_TO_RUTH] = [];
   }
 
   ionViewDidEnter() {
@@ -45,6 +48,7 @@ export class RidesPage {
       });
     this.fetchEvent();
     this.fetchDriverList();
+    this.fetchRiderList();
     this.fetchMyStatus();
   }
 
@@ -65,6 +69,17 @@ export class RidesPage {
       });
   }
 
+  private fetchRiderList() {
+    this.riderService.getRiders(RideType.GO_TO_RUTH)
+      .then(drivers => this.riders[RideType.GO_TO_RUTH] = drivers)
+      .catch(() => {
+      });
+    this.riderService.getRiders(RideType.GO_HOME)
+      .then(drivers => this.riders[RideType.GO_HOME] = drivers)
+      .catch(() => {
+      });
+  }
+
   private fetchMyStatus() {
     this.accountService.getUserRideStatus()
       .then(status => {
@@ -74,7 +89,6 @@ export class RidesPage {
         this.needARide[RideType.GO_HOME] = status.is_rider_home;
       })
   }
-
 
   showModalAddAddress(origin: UserType) {
     let modal = this.modalCtrl.create(AddressPage);

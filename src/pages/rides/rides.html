@@ -29,6 +29,9 @@
         <div *ngIf="drivers[RideType.GO_TO_RUTH]?.length > 0;else no_content_for_drivers_to_go_to_ruth">
           <driver *ngFor="let driver of drivers[RideType.GO_TO_RUTH]" [driver]="driver"></driver>
         </div>
+        <div *ngIf="riders[RideType.GO_TO_RUTH]?.length > 0">
+          <rider *ngFor="let rider of riders[RideType.GO_TO_RUTH]" [rider]="rider"></rider>
+        </div>
 
         <ng-template #no_content_for_drivers_to_go_to_ruth>
           <img src="assets/images/goTo.jpg" />
@@ -80,6 +83,9 @@
 
         <div *ngIf="drivers[RideType.GO_HOME]?.length > 0;else no_content_for_drivers_to_go_home">
           <driver *ngFor="let driver of drivers[RideType.GO_HOME]" [driver]="driver"></driver>
+        </div>
+        <div *ngIf="riders[RideType.GO_HOME]?.length > 0">
+          <rider *ngFor="let rider of riders[RideType.GO_HOME]" [rider]="rider"></rider>
         </div>
 
         <ng-template #no_content_for_drivers_to_go_home>

@@ -29,6 +29,7 @@ import {SuperTabsController, SuperTabsModule} from 'ionic2-super-tabs';
 import {AttendeeService} from '../services/attendee.service';
 import {SeatsPage} from '../pages/seats/seats';
 import {Utils} from '../services/utils.service';
+import {RiderComponent} from '../components/rider/rider';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {Utils} from '../services/utils.service';
     RidesPage,
     AttendeesPage,
     DriverComponent,
+    RiderComponent,
     AttendeeComponent,
     AddressPage,
     SeatsPage,
