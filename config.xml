@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.pcc.fridaynights" version="v0.9.0 - Nepal" xmlns="http://www.w3.org/ns/widgets">
+<widget id="org.pcc.fridaynights" version="v1.0.0 - Honduras" xmlns="http://www.w3.org/ns/widgets">
     <name>Friday Night</name>
     <description>Official app for Friday Nights International gatherings at Ruth and Milt's house!</description>
     <author email="adomoison@gmail.com" href="https://www.linkedin.com/in/adrien-domoison/">Adrien Domoison</author>
-    <content original-src="index.html" src="http://192.168.1.86:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://192.168.1.86:8100" />
@@ -92,23 +92,24 @@
     </platform>
     <allow-navigation href="http://192.168.1.86:8108" />
     <preference name="SplashScreen" value="screen" />
-    <allow-navigation href="http://192.168.1.86:8101" />
     <engine name="android" spec="6.3.0" />
     <engine name="browser" spec="5.0.0" />
     <engine name="ios" spec="^4.5.1" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
-    <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
-    <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^1.1.15" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="1728222270815747" />
         <variable name="APP_NAME" value="fridaynights" />
     </plugin>
+    <plugin name="cordova-plugin-ionic-webview" spec="^1.1.15" />
+    <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="phonegap-plugin-push" spec="^2.0.0">
         <variable name="SENDER_ID" value="797816708457" />
     </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
+    <allow-navigation href="http://192.168.1.86:8101" />
 </widget>
