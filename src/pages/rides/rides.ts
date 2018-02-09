@@ -120,7 +120,7 @@ export class RidesPage {
     if (!this.seats)
       return this.showModalSeats(rideType);
     let driver = new Driver;
-    driver.number_of_seats = this.seats;
+    driver.number_of_seats = parseInt(this.seats.toString());
     driver.ride_type = this.utils.rideTypeToString(rideType);
     driver.address = this.address;
     this.driverService.createDriver(driver)

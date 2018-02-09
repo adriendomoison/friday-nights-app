@@ -20,7 +20,7 @@ export class SeatsPage {
     this.viewCtrl.dismiss();
   }
 
-  setSeats(seats) {
+  setSeats(seats: number) {
     let s = new Seat();
     s.seats = seats;
     this.viewCtrl.dismiss(s);
