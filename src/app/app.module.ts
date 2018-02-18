@@ -22,7 +22,6 @@ import {NativeStorage} from '@ionic-native/native-storage';
 import {Facebook} from '@ionic-native/facebook';
 import {SMS} from '@ionic-native/sms';
 import {CallNumber} from '@ionic-native/call-number';
-import {Push} from '@ionic-native/push';
 import {AgmCoreModule} from '@agm/core';
 import {AddressPage} from '../pages/address/address';
 import {SuperTabsController, SuperTabsModule} from 'ionic2-super-tabs';
@@ -30,6 +29,7 @@ import {AttendeeService} from '../services/attendee.service';
 import {SeatsPage} from '../pages/seats/seats';
 import {Utils} from '../services/utils.service';
 import {RiderComponent} from '../components/rider/rider';
+import {Firebase} from '@ionic-native/firebase';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,7 @@ import {RiderComponent} from '../components/rider/rider';
     Facebook,
     SMS,
     CallNumber,
-    Push,
+    Firebase,
     Utils,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

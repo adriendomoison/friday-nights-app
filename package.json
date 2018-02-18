@@ -24,6 +24,7 @@
     "@ionic-native/call-number": "^4.3.1",
     "@ionic-native/core": "4.3.0",
     "@ionic-native/facebook": "^4.3.1",
+    "@ionic-native/firebase": "^4.5.3",
     "@ionic-native/native-storage": "^4.3.1",
     "@ionic-native/push": "^4.3.1",
     "@ionic-native/sms": "^4.3.1",
@@ -36,6 +37,7 @@
     "cordova-ios": "^4.5.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-facebook4": "^1.9.1",
+    "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-ionic-webview": "^1.1.15",
     "cordova-plugin-nativestorage": "^2.2.2",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -60,8 +62,8 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
-      "android",
       "browser",
+      "android",
       "ios"
     ],
     "plugins": {
@@ -76,10 +78,11 @@
         "APP_NAME": "fridaynights"
       },
       "cordova-sms-plugin": {},
+      "cordova-plugin-nativestorage": {},
       "phonegap-plugin-push": {
         "SENDER_ID": "797816708457"
       },
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-firebase": {}
     }
   }
 }

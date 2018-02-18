@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, Platform, ToastController} from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 import {AccountService, FacebookCredentials, UserNotificationToken} from '../../services/account.service';
 import {Facebook} from '@ionic-native/facebook';
-import {Push, PushObject, PushOptions} from '@ionic-native/push';
 import {TabsControllerPage} from '../tabs-controller/tabs-controller';
+import {Firebase} from '@ionic-native/firebase';
 
 @Component({
   selector: 'page-login',
@@ -15,49 +15,26 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
-              private platform: Platform,
-              private push: Push,
+              private firebase: Firebase,
               private facebook: Facebook,
               private accountService: AccountService) {
   }
 
   initPushNotification() {
-    if (!this.platform.is('cordova')) {
-      return;
-    }
+      this.firebase.getToken()
+        .then(token => {
+          this.accountService.getCurrentUser().then(user => {
+            this.accountService.updateNotificationToken(new UserNotificationToken(user.email, token));
+          });
+        })
+        .catch(error => console.error('Error getting token', error));
 
-    this.push.hasPermission()
-      .then((res: any) => {
-        if (res.isEnabled) {
-          console.log('We have permission to send push notifications');
-        } else {
-          console.log('We do not have permission to send push notifications');
-        }
-      });
-
-    const options: PushOptions = {
-      android: {},
-      ios: {
-        alert: 'true',
-        badge: true,
-        sound: 'false'
-      },
-      windows: {},
-      browser: {
-        pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-      }
-    };
-
-    const pushObject: PushObject = this.push.init(options);
-
-    pushObject.on('registration').subscribe((data: any) => {
-      console.log('device token ->', data.registrationId);
-      this.accountService.getCurrentUser().then(user => {
-        this.accountService.updateNotificationToken(new UserNotificationToken(user.email, data.registrationId));
-      });
-    });
-
-    pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+      this.firebase.onTokenRefresh()
+        .subscribe((token: string) => {
+          this.accountService.getCurrentUser().then(user => {
+            this.accountService.updateNotificationToken(new UserNotificationToken(user.email, token));
+          });
+        });
   }
 
   facebookLogin(): void {
